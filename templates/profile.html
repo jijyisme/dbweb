@@ -7,7 +7,7 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
 </style>
 <body class="w3-light-grey">
 
@@ -27,7 +27,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         </div>
         <div class="w3-container">
           <div class="w3-container w3-text-black">
-            <h2>Chavisa Thamjarat</h2>
+            <h2>ชวิศา ธรรมจรัส</h2>
           </div>
           <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-blue"></i>Instructor</p>
           <p><i class="fa fa-tasks fa-fw w3-margin-right w3-large w3-text-blue"></i>Faculty of Engineering</p>
@@ -70,16 +70,17 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
       <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Information Center</h2>
+          <div class="w3-bar w3-grey" style = "margin:100px 10px 0px">
 
+          </div>
            <!--TABLE -->
         <div class="w3-container " style="height:900px">
                 <div class="w3-bar w3-white" style = "margin:100px 10px 0px">
 
-                  <input class="w3-input w3-border w3-bar-item w3-margin-right" type="text" style="width: 300px" placeholder="type here">
+               <!--   <input class="w3-input w3-border w3-bar-item w3-margin-right" type="text" style="width: 300px" placeholder="type here">
                   <button class="w3-button w3-round w3-blue w3-text-white w3-bar-item w3-margin-right" onclick="change_sel">Search<i class="fa fa-search fa-fw w3-large w3-text-white"></i></button>
-
                   <div class="w3-dropdown-hover w3-blue w3-margin-right">
-                    <button class="w3-button w3-text-white">Edit</button>
+                    <button class="w3-button w3-text-white">Field</button>
                     <div class="w3-dropdown-content w3-bar-block w3-card-4">
                       <div class ="w3-container w3-card w3-light-grey">
                         <p><i class="fa fa-gear fa-fw w3-large w3-text-blue"></i>Select Columns</p>
@@ -89,17 +90,29 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                         </form>
                         </div>
                     </div>
+                  </div>-->
+                  <div class="w3-dropdown-hover w3-blue w3-margin-right">
+                    <button id = "addcolumn" class="w3-button w3-text-white flip" onclick="toggle('addcolumn','addtab')">Add Column</button>
                   </div>
-                  <div class="w3-dropdown-hover w3-blue">
-                    <button class="w3-button w3-text-white">Filter</button>
-                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                      <a href="#" class="w3-bar-item w3-button">Link 1</a>
-                      <a href="#" class="w3-bar-item w3-button">Link 2</a>
-                      <a href="#" class="w3-bar-item w3-button">Link 3</a>
-                    </div>
+                  <div class="w3-dropdown-hover w3-blue w3-margin-right">
+                    <button id = "filter" class="w3-button w3-text-white flip" onclick="toggle('filter','filtertab')">Filter</button>
                   </div>
-                </div>
 
+                </div>
+                <div class ="w3-margin-left w3-container w3-grey" id="addtab" style ="display:none">
+                        <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                        <form action="">
+                          <input type="checkbox" name="vehicle" value="s_name">Name<br>
+                          <input type="checkbox" name="vehicle" value="s_lastname">Surname
+                        </form>
+                  </div>
+                <div class ="w3-margin-left w3-container w3-grey" id="filtertab" style ="display:none">
+                        <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
+                        <form action="">
+                          <input type="checkbox" name="vehicle" value="s_name">Name<br>
+                          <input type="checkbox" name="vehicle" value="s_lastname">Surname
+                        </form>
+                  </div>
 
               <table  style="margin-top:50px" class="w3-table-all w3-hoverable">
                 <thead>
@@ -157,7 +170,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
               </table>
             </div>
         </div>
-      </div>
+
 
       <div class="w3-container w3-card-2 w3-white">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Education</h2>
@@ -195,6 +208,18 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <i class="fa fa-twitter w3-hover-opacity"></i>
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">General AMR</a></p>
 </footer>
-<script src="profile.js"></script>
+<script>
+  function toggle(button,input) {
+    var x = document.getElementById(input);
+    var y = document.getElementById(button);
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+        y.style.background = '#bbb'
+    } else {
+        x.style.display = 'none';
+        y.style.background = '#2196F3'
+    }
+}
+</script>
 </body>
 </html>

@@ -23,6 +23,12 @@ function change_myselect(sel) {
   xmlhttp.send("x=" + dbParam);
   }
 
-function expand(){
-
+function toggle() {
+    var x = document.getElementById('tab');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+        style.backgroundColor =
+    } else {
+        x.style.display = 'none';
+    }
 }
