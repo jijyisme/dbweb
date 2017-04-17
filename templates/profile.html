@@ -97,13 +97,21 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
                   <div class="w3-dropdown-hover w3-blue w3-margin-right">
                     <button id = "filter" class="w3-button w3-text-white flip" onclick="toggle('filter','filtertab')">Filter</button>
                   </div>
-
+                  <div class="w3-dropdown-hover w3-blue w3-margin-right">
+                    <button id = "apply" class="w3-button w3-text-white flip" onclick="show()">Apply</button>
+                  </div>
                 </div>
                 <div class ="w3-margin-left w3-container w3-grey" id="addtab" style ="display:none">
                         <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                         <form action="">
                           <input type="checkbox" name="vehicle" value="s_name">Name<br>
-                          <input type="checkbox" name="vehicle" value="s_lastname">Surname
+                          <input type="checkbox" name="vehicle" value="s_lastname">Surname<br>
+                          <input type="checkbox" name="vehicle" value="s_name">Year<br>
+                          <input type="checkbox" name="vehicle" value="s_lastname">Tel<br>
+                          <input type="checkbox" name="vehicle" value="s_name">Address<br>
+                          <input type="checkbox" name="vehicle" value="s_lastname">Email<br>
+                          <input type="checkbox" name="vehicle" value="s_name">GPAX<br>
+                          <input type="checkbox" name="vehicle" value="s_lastname">Status<br>
                         </form>
                   </div>
                 <div class ="w3-margin-left w3-container w3-grey" id="filtertab" style ="display:none">
@@ -113,61 +121,62 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
                           <input type="checkbox" name="vehicle" value="s_lastname">Surname
                         </form>
                   </div>
-
-              <table  style="margin-top:50px" class="w3-table-all w3-hoverable">
-                <thead>
-                  <tr class="w3-blue">
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Points</th>
+              <div id = "table" class =w3-container style="display:none">
+                <table  style="margin-top:50px " class="w3-table-all w3-hoverable">
+                  <thead>
+                    <tr class="w3-blue">
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>GPAX</th>
+                    </tr>
+                  </thead>
+                  <tr>
+                    <td>Jill</td>
+                    <td>Smith</td>
+                    <td>3.48</td>
                   </tr>
-                </thead>
-                <tr>
-                  <td>Jill</td>
-                  <td>Smith</td>
-                  <td>50</td>
-                </tr>
-                <tr>
-                  <td>Eve</td>
-                  <td>Jackson</td>
-                  <td>94</td>
-                </tr>
-                <tr>
-                  <td>Adam</td>
-                  <td>Johnson</td>
-                  <td>67</td>
-                </tr>
-                <tr>
-                  <td>Jill</td>
-                  <td>Smith</td>
-                  <td>50</td>
-                </tr>
-                <tr>
-                  <td>Eve</td>
-                  <td>Jackson</td>
-                  <td>94</td>
-                </tr>
-                <tr>
-                  <td>Adam</td>
-                  <td>Johnson</td>
-                  <td>67</td>
-                </tr>
-                <tr>
-                  <td>Jill</td>
-                  <td>Smith</td>
-                  <td>50</td>
-                </tr>
-                <tr>
-                  <td>Eve</td>
-                  <td>Jackson</td>
-                  <td>94</td>
-                </tr>
-                <tr>
-                  <td>Adam</td>
-                  <td>Johnson</td>
-                  <td>67</td>
-                </tr>
-              </table>
+                  <tr>
+                    <td>Eve</td>
+                    <td>Jackson</td>
+                    <td>3.90</td>
+                  </tr>
+                  <tr>
+                    <td>Adam</td>
+                    <td>Johnson</td>
+                    <td>4.00</td>
+                  </tr>
+                  <tr>
+                    <td>Jungsoo</td>
+                    <td>Kim</td>
+                    <td>2.9</td>
+                  </tr>
+                  <tr>
+                    <td>Evelyn</td>
+                    <td>Lee</td>
+                    <td>1.70</td>
+                  </tr>
+                  <tr>
+                    <td>Adam</td>
+                    <td>Levine</td>
+                    <td>3.67</td>
+                  </tr>
+                  <tr>
+                    <td>Rihanna</td>
+                    <td>Brad</td>
+                    <td>2.50</td>
+                  </tr>
+                  <tr>
+                    <td>Chavi</td>
+                    <td>Thamjarat</td>
+                    <td>2.94</td>
+                  </tr>
+                  <tr>
+                    <td>Fifa</td>
+                    <td>Johnson</td>
+                    <td>3.18</td>
+                  </tr>
+                </table>
+              </div>
             </div>
         </div>
 
@@ -220,6 +229,9 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
         y.style.background = '#2196F3'
     }
 }
+  function show(){
+    document.getElementById('table').style.display='block';
+  }
 </script>
 </body>
 </html>
