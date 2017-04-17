@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<title>Profile</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+<body class="w3-light-grey">
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+
+    <!-- Left Column -->
+    <div class="w3-third">
+
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container">
+          <img src="http://www.lovemarks.com/wp-content/uploads/profile-avatars/default-avatar-cute-cactus.png" style="width:100%" alt="Avatar">
+
+        </div>
+        <div class="w3-container">
+          <div class="w3-container w3-text-black">
+            <h2>Chavisa Thamjarat</h2>
+          </div>
+          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-blue"></i>Instructor</p>
+          <p><i class="fa fa-tasks fa-fw w3-margin-right w3-large w3-text-blue"></i>Faculty of Engineering</p>
+          <p><i class="fa fa-book fa-fw w3-margin-right w3-large w3-text-blue"></i>Department of Computer Engineering</p>
+          <p><i class="fa fa-key fa-fw w3-margin-right w3-large w3-text-blue"></i>5730119021</p>
+          <button class="w3-button w3-blue w3-text-white w3-bar-item w3-round-large">Sign Out<i class="fa fa-sign-out fa-fw w3-margin-right w3-large w3-text-white"></i></button>
+
+          <hr>
+
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue"></i>Skills</b></p>
+          <p>Adobe Photoshop</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-blue" style="width:90%">90%</div>
+          </div>
+          <p>Photography</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-blue" style="width:80%">
+              <div class="w3-center w3-text-white">80%</div>
+            </div>
+          </div>
+          <p>Illustrator</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-blue" style="width:75%">75%</div>
+          </div>
+          <p>Media</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-blue" style="width:50%">50%</div>
+          </div>
+          <br>
+
+          <br>
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+
+      <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Information Center</h2>
+
+           <!--TABLE -->
+        <div class="w3-container " style="height:900px">
+                <div class="w3-bar w3-white" style = "margin:100px 10px 0px">
+
+                  <input class="w3-input w3-border w3-bar-item w3-margin-right" type="text" style="width: 300px" placeholder="type here">
+                  <button class="w3-button w3-round w3-blue w3-text-white w3-bar-item w3-margin-right" onclick="change_sel">Search<i class="fa fa-search fa-fw w3-large w3-text-white"></i></button>
+
+                  <div class="w3-dropdown-hover w3-blue w3-margin-right">
+                    <button class="w3-button w3-text-white">Edit</button>
+                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                      <div class ="w3-container w3-card w3-light-grey">
+                        <p><i class="fa fa-gear fa-fw w3-large w3-text-blue"></i>Select Columns</p>
+                        <form action="">
+                          <input class = "w3-margin-left" type="checkbox" name="vehicle" value="s_name">Name<br>
+                          <input type="checkbox" name="vehicle" value="s_lastname">Surname
+                        </form>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="w3-dropdown-hover w3-blue">
+                    <button class="w3-button w3-text-white">Filter</button>
+                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                      <a href="#" class="w3-bar-item w3-button">Link 1</a>
+                      <a href="#" class="w3-bar-item w3-button">Link 2</a>
+                      <a href="#" class="w3-bar-item w3-button">Link 3</a>
+                    </div>
+                  </div>
+                </div>
+
+
+              <table  style="margin-top:50px" class="w3-table-all w3-hoverable">
+                <thead>
+                  <tr class="w3-blue">
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Points</th>
+                  </tr>
+                </thead>
+                <tr>
+                  <td>Jill</td>
+                  <td>Smith</td>
+                  <td>50</td>
+                </tr>
+                <tr>
+                  <td>Eve</td>
+                  <td>Jackson</td>
+                  <td>94</td>
+                </tr>
+                <tr>
+                  <td>Adam</td>
+                  <td>Johnson</td>
+                  <td>67</td>
+                </tr>
+                <tr>
+                  <td>Jill</td>
+                  <td>Smith</td>
+                  <td>50</td>
+                </tr>
+                <tr>
+                  <td>Eve</td>
+                  <td>Jackson</td>
+                  <td>94</td>
+                </tr>
+                <tr>
+                  <td>Adam</td>
+                  <td>Johnson</td>
+                  <td>67</td>
+                </tr>
+                <tr>
+                  <td>Jill</td>
+                  <td>Smith</td>
+                  <td>50</td>
+                </tr>
+                <tr>
+                  <td>Eve</td>
+                  <td>Jackson</td>
+                  <td>94</td>
+                </tr>
+                <tr>
+                  <td>Adam</td>
+                  <td>Johnson</td>
+                  <td>67</td>
+                </tr>
+              </table>
+            </div>
+        </div>
+      </div>
+
+      <div class="w3-container w3-card-2 w3-white">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Education</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>W3Schools.com</b></h5>
+          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Forever</h6>
+          <p>Web Development! All I need to know in one place</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>London Business School</b></h5>
+          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2015</h6>
+          <p>Master Degree</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>School of Coding</b></h5>
+          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2010 - 2013</h6>
+          <p>Bachelor Degree</p><br>
+        </div>
+      </div>
+
+    <!-- End Right Column -->
+    </div>
+
+  <!-- End Grid -->
+  </div>
+
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-blue w3-center w3-margin-top">
+  <p>Contact Us</p>
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">General AMR</a></p>
+</footer>
+<script src="profile.js"></script>
+</body>
+</html>
