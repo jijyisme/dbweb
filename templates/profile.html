@@ -36,7 +36,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
           <button class="w3-button w3-blue w3-text-white w3-bar-item w3-round-large">Sign Out<i class="fa fa-sign-out fa-fw w3-margin-right w3-large w3-text-white"></i></button>
 
           <hr>
-
+<!--
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue"></i>Skills</b></p>
           <p>Adobe Photoshop</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
@@ -58,7 +58,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
           </div>
           <br>
 
-          <br>
+          <br>-->
         </div>
       </div><br>
 
@@ -71,11 +71,19 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
       <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Information Center</h2>
           <div class="w3-bar w3-grey" style = "margin:100px 10px 0px">
+          </div>
 
+          <div class="w3-blue w3-container ">
+                    <button id = "tab_student"class="w3-button w3-text-white " onclick="hide('tab_student')">ข้อมูลส่วนตัวนิสิต</button>
+                    <button id = "tab_enrollment"class="w3-button w3-text-white " onclick="hide('tab_enrollment')">ประวัติการลงทะเบียน</button>
+                    <button id = "tab_activity"class="w3-button w3-text-white " onclick="hide('tab_activity')">ประวัติการเข้าร่วมกิจกรรม</button>
+                    <button id = "tab_intern"class="w3-button w3-text-white " onclick="hide('tab_intern')">ประวัติการฝึกงาน</button>
+                    <button id = "tab_award"class="w3-button w3-text-white " onclick="hide('tab_award')">ประวัติการได้รางวัล</button>
+                    <button id = "tab_senior"class="w3-button w3-text-white " onclick="hide('tab_senior')">Senior project</button>
           </div>
            <!--TABLE -->
         <div class="w3-container " style="height:1200px">
-                <div class="w3-bar w3-white" style = "margin:100px 10px 0px">
+                <div class="w3-bar w3-white" style = "margin:10px 10px 0px">
 
                <!--   <input class="w3-input w3-border w3-bar-item w3-margin-right" type="text" style="width: 300px" placeholder="type here">
                   <button class="w3-button w3-round w3-blue w3-text-white w3-bar-item w3-margin-right" onclick="change_sel">Search<i class="fa fa-search fa-fw w3-large w3-text-white"></i></button>
@@ -114,6 +122,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
                           <input type="checkbox" name="vehicle" value="s_lastname">Status<br>
                         </form>
                   </div>
+
                 <div class ="w3-margin-left w3-round w3-container w3-grey" id="filtertab" style ="display:none">
                         <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
                         <p>Column :
@@ -240,8 +249,16 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
   function show(){
     document.getElementById('table').style.display='block';
   }
-  function hide(){
+  function hide(tab){
+    var x = ['tab_student','tab_intern','tab_activity','tab_enrollment','tab_award','tab_senior']
     document.getElementById('table').style.display='none';
+    for (i = 0;i<6;i++){
+      if(x[i] == tab) {
+      document.getElementById(x[i]).style.background = '#bbb';}
+      else{
+      document.getElementById(x[i]).style.background = '#2196F3';}
+    }
+
   }
 </script>
 </body>
