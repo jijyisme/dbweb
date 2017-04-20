@@ -1,34 +1,21 @@
 <!DOCTYPE html>
 <html>
+<header>
 <title>Profile</title>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="profile.css">
-
 <style>
-    .wrapper-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    }
-    .wrapper-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    }
-    .item-center {
-        align-self: center;
-    }
-    .item-left {
-    align-self: left;
-    }
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
 </style>
+</header>
 <body class="w3-light-grey">
+<table  style="margin-top:50px " class="w3-table-all w3-hoverable" id="ruj-table">
 
+            </table>
 <!-- Page Container -->
 <div class="w3-content w3-margin-top" style="max-width:1400px;">
 
@@ -36,37 +23,24 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
   <div class="w3-row-padding">
 
     <!-- Left Column -->
-    <div class="w3-cell-top">
+    <div class="w3-third">
 
       <div class="w3-white w3-text-grey w3-card-4">
         <div class="w3-display-container">
-          <!--<img src="http://www.lovemarks.com/wp-content/uploads/profile-avatars/default-avatar-cute-cactus.png" style="width:100%" alt="Avatar"> -->
+          <img src="http://www.lovemarks.com/wp-content/uploads/profile-avatars/default-avatar-cute-cactus.png" style="width:100%" alt="Avatar">
 
         </div>
-        <div class="w3-container ">
-
-                <div class="w3-container wrapper-row ">
-                    <div class="item-left">
-                        <img src="http://www.lovemarks.com/wp-content/uploads/profile-avatars/default-avatar-cute-cactus.png" style="height:200px " alt="Avatar">
-
-                    </div>
-                    <div class="item-center">
-                        <div class="w3-container w3-text-black wrapper-col">
-                            <div class="item-center">
-                            <h2>ชวิศา ธรรมจรัส</h2>
-                              <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-blue"></i>Instructor</p>
-                              <p><i class="fa fa-tasks fa-fw w3-margin-right w3-large w3-text-blue"></i>Faculty of Engineering</p>
-                              <p><i class="fa fa-book fa-fw w3-margin-right w3-large w3-text-blue"></i>Department of Computer Engineering</p>
-                              <p><i class="fa fa-key fa-fw w3-margin-right w3-large w3-text-blue"></i>5730119021</p>
-                              </div>
-                            <button class="w3-button w3-blue w3-text-white w3-bar-item w3-round-large">Sign Out<i class="fa fa-sign-out fa-fw w3-margin-right w3-large w3-text-white"></i></button>
-                         </div>
-                    </div>
-                </div>
+        <div class="w3-container">
+          <div class="w3-container w3-text-black">
+            <h2>ชวิศา ธรรมจรัส</h2>
+          </div>
+          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-blue"></i>Instructor</p>
+          <p><i class="fa fa-tasks fa-fw w3-margin-right w3-large w3-text-blue"></i>Faculty of Engineering</p>
+          <p><i class="fa fa-book fa-fw w3-margin-right w3-large w3-text-blue"></i>Department of Computer Engineering</p>
+          <p><i class="fa fa-key fa-fw w3-margin-right w3-large w3-text-blue"></i>5730119021</p>
+          <button class="w3-button w3-blue w3-text-white w3-bar-item w3-round-large">Sign Out<i class="fa fa-sign-out fa-fw w3-margin-right w3-large w3-text-white"></i></button>
 
           <hr>
-
-
 <!--
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue"></i>Skills</b></p>
           <p>Adobe Photoshop</p>
@@ -97,7 +71,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
     </div>
 
     <!-- Right Column -->
-    <div class="w3-cell-bottom">
+    <div class="w3-twothird">
 
       <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Information Center</h2>
@@ -190,60 +164,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
                         </p>
                   <p><a href="https://www.w3schools.com/w3css/default.asp" target="_blank">add more</a></p>
                   </div>
-              <div id = "table" class =w3-container style="display:none">
-                <table  style="margin-top:50px " class="w3-table-all w3-hoverable">
-                  <thead>
-                    <tr class="w3-blue">
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>GPAX</th>
-                    </tr>
-                  </thead>
-                  <tr>
-                    <td>Jill</td>
-                    <td>Smith</td>
-                    <td>3.48</td>
-                  </tr>
-                  <tr>
-                    <td>Eve</td>
-                    <td>Jackson</td>
-                    <td>3.90</td>
-                  </tr>
-                  <tr>
-                    <td>Adam</td>
-                    <td>Johnson</td>
-                    <td>4.00</td>
-                  </tr>
-                  <tr>
-                    <td>Jungsoo</td>
-                    <td>Kim</td>
-                    <td>2.9</td>
-                  </tr>
-                  <tr>
-                    <td>Evelyn</td>
-                    <td>Lee</td>
-                    <td>1.70</td>
-                  </tr>
-                  <tr>
-                    <td>Adam</td>
-                    <td>Levine</td>
-                    <td>3.67</td>
-                  </tr>
-                  <tr>
-                    <td>Rihanna</td>
-                    <td>Brad</td>
-                    <td>2.50</td>
-                  </tr>
-                  <tr>
-                    <td>Chavi</td>
-                    <td>Thamjarat</td>
-                    <td>2.94</td>
-                  </tr>
-                  <tr>
-                    <td>Fifa</td>
-                    <td>Johnson</td>
-                    <td>3.18</td>
-                  </tr>
+
+
+            <div id = "table" class =w3-container style="display:block">
+
+                <table  id = "table_data" style="margin-top:50px " class="w3-table-all w3-hoverable">
+
+
                 </table>
               </div>
             </div>
@@ -290,8 +217,49 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
       document.getElementById(x[i]).style.background = '#2196F3';}
     }
 
-
   }
+</script>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<script>
+    $(function() {
+        $("#apply").on('click',function(){
+            $.ajax({
+              type: "GET",
+              url: "~/secondpage/views.py",
+
+            });
+        var header = '<thead><tr class="w3-blue"><th>ID</th><th>Name</th><th>Age</th></tr></thead>'
+        var data = [
+            {
+                id: 1,
+                name: 'kosate',
+                age: 10
+            },
+            {
+                id: 2,
+                name: 'asd',
+                age: 18
+            }
+        ];
+
+        var txt = '';
+        for(var i=0; i<data.length; i++) {
+            txt += '<tr>';
+            txt += '<td>' + data[i].id + '</td>';
+            txt += '<td>' + data[i].name + '</td>';
+            txt += '<td>' + data[i].age + '</td>';
+            txt += '</tr>';
+        }
+
+        $('#table_data').html(header+txt);
+        });
+
+
+    });
 </script>
 </body>
 </html>
+>

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
 MIDDLEWARE = [
@@ -100,7 +101,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "/templates/flat-login-form/"),
+  # os.path.join(BASE_DIR, "static"),
+
+  #  "/var/www/static",
 ]
 
 # Internationalization
