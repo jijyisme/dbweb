@@ -6,7 +6,25 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="profile.css">
+
 <style>
+    .wrapper-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    }
+    .wrapper-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    }
+    .item-center {
+        align-self: center;
+    }
+    .item-left {
+    align-self: left;
+    }
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
 </style>
 <body class="w3-light-grey">
@@ -18,24 +36,37 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
   <div class="w3-row-padding">
 
     <!-- Left Column -->
-    <div class="w3-third">
+    <div class="w3-cell-top">
 
       <div class="w3-white w3-text-grey w3-card-4">
         <div class="w3-display-container">
-          <img src="http://www.lovemarks.com/wp-content/uploads/profile-avatars/default-avatar-cute-cactus.png" style="width:100%" alt="Avatar">
+          <!--<img src="http://www.lovemarks.com/wp-content/uploads/profile-avatars/default-avatar-cute-cactus.png" style="width:100%" alt="Avatar"> -->
 
         </div>
-        <div class="w3-container">
-          <div class="w3-container w3-text-black">
-            <h2>ชวิศา ธรรมจรัส</h2>
-          </div>
-          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-blue"></i>Instructor</p>
-          <p><i class="fa fa-tasks fa-fw w3-margin-right w3-large w3-text-blue"></i>Faculty of Engineering</p>
-          <p><i class="fa fa-book fa-fw w3-margin-right w3-large w3-text-blue"></i>Department of Computer Engineering</p>
-          <p><i class="fa fa-key fa-fw w3-margin-right w3-large w3-text-blue"></i>5730119021</p>
-          <button class="w3-button w3-blue w3-text-white w3-bar-item w3-round-large">Sign Out<i class="fa fa-sign-out fa-fw w3-margin-right w3-large w3-text-white"></i></button>
+        <div class="w3-container ">
+
+                <div class="w3-container wrapper-row ">
+                    <div class="item-left">
+                        <img src="http://www.lovemarks.com/wp-content/uploads/profile-avatars/default-avatar-cute-cactus.png" style="height:200px " alt="Avatar">
+
+                    </div>
+                    <div class="item-center">
+                        <div class="w3-container w3-text-black wrapper-col">
+                            <div class="item-center">
+                            <h2>ชวิศา ธรรมจรัส</h2>
+                              <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-blue"></i>Instructor</p>
+                              <p><i class="fa fa-tasks fa-fw w3-margin-right w3-large w3-text-blue"></i>Faculty of Engineering</p>
+                              <p><i class="fa fa-book fa-fw w3-margin-right w3-large w3-text-blue"></i>Department of Computer Engineering</p>
+                              <p><i class="fa fa-key fa-fw w3-margin-right w3-large w3-text-blue"></i>5730119021</p>
+                              </div>
+                            <button class="w3-button w3-blue w3-text-white w3-bar-item w3-round-large">Sign Out<i class="fa fa-sign-out fa-fw w3-margin-right w3-large w3-text-white"></i></button>
+                         </div>
+                    </div>
+                </div>
 
           <hr>
+
+
 <!--
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue"></i>Skills</b></p>
           <p>Adobe Photoshop</p>
@@ -66,7 +97,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
     </div>
 
     <!-- Right Column -->
-    <div class="w3-twothird">
+    <div class="w3-cell-bottom">
 
       <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Information Center</h2>
@@ -258,6 +289,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
       else{
       document.getElementById(x[i]).style.background = '#2196F3';}
     }
+
 
   }
 </script>
