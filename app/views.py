@@ -8,7 +8,7 @@ from django.http import JsonResponse
 def index(request):
     return render(request, "login.html")
 
-def validate(request):
+def validate1(request):
     first_name = request.GET.get('first_name', None)
 
     query = 'SELECT * FROM sql_person'
@@ -26,8 +26,10 @@ def validate(request):
                 data[column].append(person.last_name)
 
     return JsonResponse(data)
+
+
 ## for test jijy's sctipt
-def validate_copy(request):
+def validate(request):
     return HttpResponse("teacher")
 
 

@@ -1,5 +1,4 @@
 {% load staticfiles %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +48,7 @@
           <div class="w3-bar w3-grey" style = "margin:100px 10px 0px">
           </div>
           <!--TAB-->
-          <div class="w3-blue w3-container ">
+          <div id = "tab" class="w3-blue w3-container ">
             {% block tab %}{% endblock %}
           </div>
            <!--TABLE SETTING -->
@@ -57,23 +56,23 @@
                 <div class="w3-bar w3-white" style = "margin:10px 10px 0px">
 
                   <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
-                    <button id = "addcolumn_btn" class="w3-button w3-round w3-text-white flip" onclick="toggle('addcolumn','addtab')">Add Column</button>
+                    <button id = "addcolumn_btn" class="w3-button w3-round w3-text-white flip">Add Column</button>
                   </div>
                   <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
-                    <button id = "filter_btn" class="w3-button w3-round w3-text-white flip" onclick="toggle('filter','filtertab')">Filter</button>
+                    <button id = "filter_btn" class="w3-button w3-round w3-text-white flip">Filter</button>
                   </div>
                   <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
                     <button id = "apply_btn" class="w3-button w3-round w3-text-white flip">Apply</button>
                   </div>
                 </div>
-                <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtab" style ="display:none">
+                <div class ="w3-margin-left w3-round w3-container w3-grey" id="addcolumn_pane" style ="display:none">
                         <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                         <form action="">
                             {% block add_column %}{% endblock %}
                         </form>
                   </div>
 
-                <div class ="w3-margin-left w3-round w3-container w3-grey" id="filtertab" style ="display:none">
+                <div class ="w3-margin-left w3-round w3-container w3-grey" id="filter_pane" style ="display:none">
                         <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
                         {% block filter%}{% endblock %}
                 </div>
