@@ -10,6 +10,7 @@
     <link rel='stylesheet' href="{% static 'css/font1.css' %}">
     <link rel="stylesheet" href="{% static 'css/font2.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
         html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
     </style>
@@ -56,13 +57,13 @@
                 <div class="w3-bar w3-white" style = "margin:10px 10px 0px">
 
                   <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
-                    <button id = "addcolumn" class="w3-button w3-round w3-text-white flip" onclick="toggle('addcolumn','addtab')">Add Column</button>
+                    <button id = "addcolumn_btn" class="w3-button w3-round w3-text-white flip" onclick="toggle('addcolumn','addtab')">Add Column</button>
                   </div>
                   <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
-                    <button id = "filter" class="w3-button w3-round w3-text-white flip" onclick="toggle('filter','filtertab')">Filter</button>
+                    <button id = "filter_btn" class="w3-button w3-round w3-text-white flip" onclick="toggle('filter','filtertab')">Filter</button>
                   </div>
                   <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
-                    <button id = "apply" class="w3-button w3-round w3-text-white flip" onclick="show()">Apply</button>
+                    <button id = "apply_btn" class="w3-button w3-round w3-text-white flip">Apply</button>
                   </div>
                 </div>
                 <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtab" style ="display:none">
@@ -78,7 +79,7 @@
                 </div>
 
 
-            <div id = "table" class =w3-container style="display:block">
+            <div id = "table" class =w3-container>
 
                 <table  id = "table_data" style="margin-top:50px " class="w3-table-all w3-hoverable">
                     {% block table%}{% endblock %}
@@ -103,5 +104,10 @@
   <i class="fa fa-twitter w3-hover-opacity"></i>
   <p>Powered by <a href="" target="_blank">General AMR</a></p>
 </footer>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="{% static 'js/table.js' %}"></script>
+<script>
+{% block action %}{% endblock %}
+</script>
 </html>
+

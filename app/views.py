@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Person
+#from .models import Person
 from . import views
 from django.http import JsonResponse
 
@@ -12,7 +12,7 @@ def validate(request):
     first_name = request.GET.get('first_name', None)
 
     query = 'SELECT * FROM sql_person'
-    all_persons = Person.objects.raw(query)
+#    all_persons = Person.objects.raw(query)
     selected_columns = ['first_name', 'last_name']
     data = {}
     for column in selected_columns:

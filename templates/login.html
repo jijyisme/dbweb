@@ -124,7 +124,7 @@
 				<label class="login-field-icon fui-lock" for="login-pass"></label>
 				</div>
 
-				<a class="btn btn-primary btn-large btn-block" href="#" onclick="location.href = 'http://127.0.0.1:8000/profile/';">login</a>
+				<a id = "submit_btn" class="btn btn-primary btn-large btn-block">login</a>
 				<a class="login-link" href="#">Lost your password?</a>
 			</div>
 			<div class="warning">
@@ -137,15 +137,15 @@
 
 </body>
 </html>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script>
-	$function({
+$("#submit_btn").click(function(){
+    $.ajax({
+      type: "POST",
+      url: "/home/validate",
+      data: { id: document.getElementById("login-name.value"), password: document.getElementById("login-pass").value}
+    });
 
-	ajax
-	type =post
-	data = textbox.val()
-	.done(function(message)
-location.href = '/profile';
-	}}
+});
 
 </script>
