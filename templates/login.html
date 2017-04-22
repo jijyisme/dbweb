@@ -141,9 +141,18 @@
 <script>
 $("#submit_btn").click(function(){
     $.ajax({
-      type: "POST",
+      type: "GET",
       url: "/home/validate",
-      data: { id: document.getElementById("login-name.value"), password: document.getElementById("login-pass").value}
+      data: { id: document.getElementById("login-name").value, password: document.getElementById("login-pass").value},
+      success: function(response) {
+		var type = response; 
+		if(type == "teacher"){
+		 window.location = "home/teacher"; } 
+		else if(type == "head"){ 
+		window.location = "home/head"; }
+		 else if(type == "officer"){ 
+		window.location = "home/officer"; }
+      }
     });
 
 });

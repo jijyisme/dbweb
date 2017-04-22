@@ -26,6 +26,10 @@ def validate(request):
                 data[column].append(person.last_name)
 
     return JsonResponse(data)
+## for test jijy's sctipt
+def validate_copy(request):
+    return HttpResponse("teacher")
+
 
 def teacher(request) :
     return render(request, 'teacher.html')
