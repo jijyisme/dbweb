@@ -1,0 +1,107 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+    <link rel='stylesheet' href="{% static 'css/font1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font2.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
+    </style>
+</head>
+<body class="w3-light-grey">
+    <!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+
+    <!-- Left Column -->
+    <div class="w3-quarter">
+
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container">
+            {% block profilepic %}{% endblock %}
+
+        </div>
+          <div class="w3-container">
+              <div class="w3-container w3-text-black">
+                  {% block name %}{% endblock %}
+              </div>
+              {% block profile %}{% endblock %}
+              <button class="w3-button w3-blue w3-text-white w3-bar-item w3-round-large">Sign Out<i class="fa fa-sign-out fa-fw w3-margin-right w3-large w3-text-white"></i></button>
+                  <hr>
+          </div>
+      </div><br>
+    </div>
+
+   <!-- Right Column -->
+    <div class="w3-threequarter">
+
+      <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Information Center</h2>
+          <div class="w3-bar w3-grey" style = "margin:100px 10px 0px">
+          </div>
+          <!--TAB-->
+          <div class="w3-blue w3-container ">
+            {% block tab %}{% endblock %}
+          </div>
+           <!--TABLE SETTING -->
+        <div class="w3-container " style="height:1200px">
+                <div class="w3-bar w3-white" style = "margin:10px 10px 0px">
+
+                  <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                    <button id = "addcolumn" class="w3-button w3-round w3-text-white flip" onclick="toggle('addcolumn','addtab')">Add Column</button>
+                  </div>
+                  <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                    <button id = "filter" class="w3-button w3-round w3-text-white flip" onclick="toggle('filter','filtertab')">Filter</button>
+                  </div>
+                  <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                    <button id = "apply" class="w3-button w3-round w3-text-white flip" onclick="show()">Apply</button>
+                  </div>
+                </div>
+                <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtab" style ="display:none">
+                        <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                        <form action="">
+                            {% block add_column %}{% endblock %}
+                        </form>
+                  </div>
+
+                <div class ="w3-margin-left w3-round w3-container w3-grey" id="filtertab" style ="display:none">
+                        <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
+                        {% block filter%}{% endblock %}
+                </div>
+
+
+            <div id = "table" class =w3-container style="display:block">
+
+                <table  id = "table_data" style="margin-top:50px " class="w3-table-all w3-hoverable">
+                    {% block table%}{% endblock %}
+                </table>
+            </div>
+        </div>
+      </div>
+
+
+    <!-- End Right Column -->
+    </div>
+  <!-- End Grid -->
+  </div>
+
+  <!-- End Page Container -->
+</div>
+</body>
+
+<footer class="w3-container w3-blue w3-center w3-margin-top">
+  <p>Contact Us</p>
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <p>Powered by <a href="" target="_blank">General AMR</a></p>
+</footer>
+
+</html>

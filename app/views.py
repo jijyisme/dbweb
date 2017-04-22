@@ -6,7 +6,7 @@ from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
-    return render(request, "profile.html")
+    return render(request, "login.html")
 
 def validate(request):
     first_name = request.GET.get('first_name', None)
@@ -26,3 +26,10 @@ def validate(request):
                 data[column].append(person.last_name)
 
     return JsonResponse(data)
+
+def teacher(request) :
+    return render(request, 'teacher.html')
+def head(request) :
+    return render(request, 'head.html')
+def officer(request) :
+    return render(request, 'officer.html')
