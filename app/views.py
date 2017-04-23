@@ -8,7 +8,7 @@ from django.http import JsonResponse
 def index(request):
     return render(request, "login.html")
 
-def validate1(request):
+def validate(request):
     first_name = request.GET.get('first_name', None)
 
     query = 'SELECT * FROM sql_person'
@@ -29,7 +29,7 @@ def validate1(request):
 
 
 ## for test jijy's sctipt
-def validate(request):
+def validate_copy(request):
     return HttpResponse("teacher")
 
 
