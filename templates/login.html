@@ -145,7 +145,7 @@ $("#submit_btn").click(function(){
       url: "/home/validate",
       data: { id: document.getElementById("login-name").value, password: document.getElementById("login-pass").value},
       success: function(response) {
-		var type = response; 
+		var type = response.type; 
 		if(type == "teacher"){
 		 window.location = "home/teacher"; } 
 		else if(type == "head"){ 
