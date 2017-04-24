@@ -1,9 +1,216 @@
-{% extends "base.html" %}
-{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <header>
+    <title>teacher</title>
 
-{% block name %}{% endblock %}
-{% block profile %}{% endblock %}
-{% block tab %}{% endblock %}
-{% block add_column %}{% endblock %}
-{% block filter%}{% endblock %}
-{% block table%}{% endblock %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+
+    {% extends "base.html" %}
+    {% load staticfiles %}
+    <style>
+    html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
+    </style>
+  </header>
+  <body class="w3-light-grey">
+    {% block name %}{% endblock %}
+    {% block profile %}{% endblock %}
+    {% block tab %}
+    <table  style="margin-top:50px " class="w3-table-all w3-hoverable" id="ruj-table">
+
+                </table>
+
+
+        <!-- Right Column -->
+
+                <div class="w3-blue w3-container">
+                      <button id = "tab_student"class="btn btn-warning " onclick="hide('addtabStudent')">ข้อมูลส่วนตัวนิสิต</button>
+                      <button id = "tab_teacher"class="btn btn-warning" onclick="hide('addtabEnroll')">ประวัติการลงทะเบียนเรียน</button>
+                      <button id = "tab_scholarship"class="btn btn-warning " onclick="hide('addtabActivity')">ประวัติการเข้าร่วมกิจกรรม</button>
+                      <button id = "tab_tution"class="btn btn-warning" onclick="hide('addtabIntern')">ประวัติการฝึกงาน</button>
+                      <button id = "tab_dean"class="btn btn-warning" onclick="hide('addtabAward')">ประวัติการรับรางวัล</button>
+                      <button id = "tab_dean"class="btn btn-warning" onclick="hide('addtabResearch')">Research</button>
+                </div>
+
+                 <!--TABLE -->
+              <div class="w3-container " style="height:1200px">
+                      <div class="w3-bar w3-blue" style = "margin:10px 10px 0px">
+
+
+                        <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                          <button id = "addcolumn" class="btn btn-warning" onclick="toggle('addcolumn','addtabTeacher')">Add Column</button>
+                        </div>
+                        <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                          <button id = "filter" class="btn btn-warning" onclick="toggle('filter','filtertab')">Filter</button>
+                        </div>
+                        <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                          <button id = "apply" class="btn btn-warning" onclick="show()">Apply</button>
+                        </div>
+                      </div>
+                      <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabStudent" style ="display:none">
+                              <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                              <form action="">
+                              <input type="checkbox" name="id" value="id">Student ID<br>
+                              <input type="checkbox" name="name" value="name">Name<br>
+                              <input type="checkbox" name="surname" value="surname">Surname<br>
+                              <input type="checkbox" name="department" value="department">Department<br>
+                              <input type="checkbox" name="faculty" value="faculty">Faculty<br>
+                              <input type="checkbox" name="address" value="address">Address<br>
+                              <input type="checkbox" name="tel" value="tel">Tel<br>
+                              <input type="checkbox" name="email" value="email">Email<br>
+                              <input type="checkbox" name="year" value="year">Year<br>
+                              <input type="checkbox" name="teacher" value="teacher">Teacher<br>
+                              </form>
+                        </div>
+                        <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabEnroll" style ="display:none">
+                                <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                                <form action="">
+                                <input type="checkbox" name="teacherID" value="id">Teacher ID<br>
+                                <input type="checkbox" name="teacherName" value="Teachername">Name<br>
+                                <input type="checkbox" name="teachersurname" value="Teachersurname">Surname<br>
+                                <input type="checkbox" name="department" value="department">Department<br>
+                                <input type="checkbox" name="faculty" value="faculty">Faculty<br>
+                                <input type="checkbox" name="address" value="address">Address<br>
+                                <input type="checkbox" name="tel" value="tel">Tel<br>
+                                <input type="checkbox" name="email" value="email">Email<br>
+                                </form>
+                          </div>
+                          <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabActivity" style ="display:none">
+                                  <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                                  <form action="">
+                                  <input type="checkbox" name="scholarID" value="id">Scholarship ID<br>
+                                  <input type="checkbox" name="nameScholar" value="nameScholar">Name<br>
+                                  <input type="checkbox" name="type" value="type">Type<br>
+                                  <input type="checkbox" name="value" value="money">Value<br>
+                                  <input type="checkbox" name="id" value="id">Student ID<br>
+                                  <input type="checkbox" name="name" value="name">Name<br>
+                                  <input type="checkbox" name="surname" value="surname">Surname<br>
+                                  <input type="checkbox" name="tel" value="tel">Tel<br>
+                                  <input type="checkbox" name="year" value="year">Year<br>
+
+                                  </form>
+                            </div>
+                            <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabIntern" style ="display:none">
+                                    <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                                    <form action="">
+                                    <input type="checkbox" name="id" value="id">Student ID<br>
+                                    <input type="checkbox" name="name" value="name">Name<br>
+                                    <input type="checkbox" name="surname" value="surname">Surname<br>
+                                    <input type="checkbox" name="department" value="department">Department<br>
+                                    <input type="checkbox" name="faculty" value="faculty">Faculty<br>
+                                    <input type="checkbox" name="year" value="year">Year<br>
+                                    <input type="checkbox" name="status" value="status">Status<br>
+                                    </form>
+                              </div>
+                              <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabAward" style ="display:none">
+                                      <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                                      <form action="">
+                                      <input type="checkbox" name="id" value="id">Student ID<br>
+                                      <input type="checkbox" name="name" value="name">Name<br>
+                                      <input type="checkbox" name="surname" value="surname">Surname<br>
+                                      <input type="checkbox" name="department" value="department">Department<br>
+                                      <input type="checkbox" name="faculty" value="faculty">Faculty<br>
+                                      <input type="checkbox" name="position" value="position">Position<br>
+                                      <input type="checkbox" name="yop" value="yop">Year of position<br>
+                                      </form>
+                                </div>
+                                <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabResearch" style ="display:none">
+                                        <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                                        <form action="">
+                                        <input type="checkbox" name="id" value="id">Student ID<br>
+                                        <input type="checkbox" name="name" value="name">Name<br>
+                                        <input type="checkbox" name="surname" value="surname">Surname<br>
+                                        <input type="checkbox" name="department" value="department">Department<br>
+                                        <input type="checkbox" name="faculty" value="faculty">Faculty<br>
+                                        <input type="checkbox" name="position" value="position">Position<br>
+                                        <input type="checkbox" name="yop" value="yop">Year of position<br>
+                                        </form>
+                                  </div>
+
+                      <div class ="w3-margin-left w3-round w3-container w3-grey" id="filtertab" style ="display:none">
+                              <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
+                              <p>Column :
+                              <select>
+                                <option value="Name">Name</option>
+                                <option value="Surname">Surname</option>
+                                <option value="GPAX">GPAX</option>
+                              </select>
+                              Value : <input type="text" name="fname">
+                                Operation :
+                              <select>
+                              <option value="greater"> <var>></var> </option>
+                              <option value="less"> <var><</var> </option>
+                              <option value="equal"><var>=</var></option>
+                              <option value="lessequal"> <var><=</var> </option>
+                              <option value="greaterequal"><var>>=</var></option>
+                              </select>
+                              </p>
+
+                        <p><a href="https://www.w3schools.com/w3css/default.asp" target="_blank">add more</a></p>
+                        </div>
+
+
+                  <div id = "table" class =w3-container style="display:block">
+
+                      <table  id = "table_data" style="margin-top:50px " class="w3-table-all w3-hoverable">
+
+
+                      </table>
+                    </div>
+                  </div>
+              </div>
+              <script>
+                function toggle(button,input) {
+                  var x = document.getElementById(input);
+                  var y = document.getElementById(button);
+                  if (x.style.display === 'none') {
+                      x.style.display = 'block';
+                      y.style.background = '#bbb'
+                  } else {
+                      x.style.display = 'none';
+                      y.style.background = '#2196F3'
+                  }
+              }
+                function show(){
+                  document.getElementById('table').style.display='block';
+                }
+                function hide(tab){
+                  var x = ['tab_student','tab_teacher','tab_scholarship','tab_tution','tab_dean']
+                  document.getElementById('table').style.display='none';
+                  for (i = 0;i<5;i++){
+                    if(x[i] == tab) {
+                    document.getElementById(x[i]).style.background = '#bbb';}
+                    else{
+                    document.getElementById(x[i]).style.background = '#2196F3';}
+                  }
+
+                }
+              </script>
+    {% endblock %}
+    {% block add_column %}
+
+    {% endblock %}
+    {% block filter%}{% endblock %}
+    {% block table%}{% endblock %}
+
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
+    <script>
+    $("input").click(){
+    $('input:checked').map(function() {
+       return ([$(this).val,0,0]);
+    }).get();
+    alert(checkValues);
+    }
+    </script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+  </html>

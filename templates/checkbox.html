@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <header>
-    <title>teacher</title>
+    <title>officer</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Latest compiled and minified CSS -->
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <!-- Latest compiled and minified JavaScript -->
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     {% extends "base.html" %}
     {% load staticfiles %}
     <style>
@@ -29,29 +29,34 @@
 
         <!-- Right Column -->
 
-                <div class="w3-blue w3-container">
-                      <button id = "tab_student"class="btn btn-warning " onclick="hide('addtabStudent')">ข้อมูลส่วนตัวนิสิต</button>
-                      <button id = "tab_teacher"class="btn btn-warning" onclick="hide('addtabEnroll')">ประวัติการลงทะเบียนเรียน</button>
-                      <button id = "tab_scholarship"class="btn btn-warning " onclick="hide('addtabActivity')">ประวัติการเข้าร่วมกิจกรรม</button>
-                      <button id = "tab_tution"class="btn btn-warning" onclick="hide('addtabIntern')">ประวัติการฝึกงาน</button>
-                      <button id = "tab_dean"class="btn btn-warning" onclick="hide('addtabAward')">ประวัติการรับรางวัล</button>
-                      <button id = "tab_dean"class="btn btn-warning" onclick="hide('addtabResearch')">Research</button>
-                      <button id = "tab_dean"class="btn btn-danger" onclick="hide('addtab')">Report</button>
+          <div class="w3-twothird">
+
+            <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
+              <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Information Center</h2>
+                <div class="w3-bar w3-grey" style = "margin:100px 10px 0px">
+                </div>
+
+                <div class="w3-blue w3-container>
+                      <button id = "tab_student"class="w3-button w3-text-white " onclick="hide('addtabStudent')">ข้อมูลส่วนตัวนิสิต</button>
+                      <button id = "tab_teacher"class="w3-button w3-text-white " onclick="hide('addtabTeacher')">ข้อมูลคณาจารย์</button>
+                      <button id = "tab_scholarship"class="w3-button w3-text-white " onclick="hide('addtabScholarship')">ประวัติการรับทุนการศึกษา</button>
+                      <button id = "tab_tution"class="w3-button w3-text-white " onclick="hide('addtabTution')">ประวัติการชำระค่าเล่าเรียน</button>
+                      <button id = "tab_dean"class="w3-button w3-text-white " onclick="hide('addtabDean')">รายชื่อคณบดีและหัวหน้าภาควิชา</button>
                 </div>
 
                  <!--TABLE -->
               <div class="w3-container " style="height:1200px">
-                      <div class="w3-bar w3-blue" style = "margin:10px 10px 0px">
+                      <div class="w3-bar w3-white" style = "margin:10px 10px 0px">
 
 
                         <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
-                          <button id = "addcolumn" class="btn btn-warning" onclick="toggle('addcolumn','addtabTeacher')">Add Column</button>
+                          <button id = "addcolumn" class="w3-button w3-round w3-text-white flip" onclick="toggle('addcolumn','addtabTeacher')">Add Column</button>
                         </div>
                         <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
-                          <button id = "filter" class="btn btn-warning" onclick="toggle('filter','filtertab')">Filter</button>
+                          <button id = "filter" class="w3-button w3-round w3-text-white flip" onclick="toggle('filter','filtertab')">Filter</button>
                         </div>
                         <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
-                          <button id = "apply" class="btn btn-warning" onclick="show()">Apply</button>
+                          <button id = "apply" class="w3-button w3-round w3-text-white flip" onclick="show()">Apply</button>
                         </div>
                       </div>
                       <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabStudent" style ="display:none">
@@ -69,7 +74,7 @@
                               <input type="checkbox" name="teacher" value="teacher">Teacher<br>
                               </form>
                         </div>
-                        <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabEnroll" style ="display:none">
+                        <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabTeacher" style ="display:none">
                                 <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                                 <form action="">
                                 <input type="checkbox" name="teacherID" value="id">Teacher ID<br>
@@ -82,7 +87,7 @@
                                 <input type="checkbox" name="email" value="email">Email<br>
                                 </form>
                           </div>
-                          <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabActivity" style ="display:none">
+                          <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabScholarship" style ="display:none">
                                   <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                                   <form action="">
                                   <input type="checkbox" name="scholarID" value="id">Scholarship ID<br>
@@ -97,7 +102,7 @@
 
                                   </form>
                             </div>
-                            <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabIntern" style ="display:none">
+                            <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabTution" style ="display:none">
                                     <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                                     <form action="">
                                     <input type="checkbox" name="id" value="id">Student ID<br>
@@ -109,7 +114,7 @@
                                     <input type="checkbox" name="status" value="status">Status<br>
                                     </form>
                               </div>
-                              <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabAward" style ="display:none">
+                              <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabDean" style ="display:none">
                                       <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                                       <form action="">
                                       <input type="checkbox" name="id" value="id">Student ID<br>
@@ -121,18 +126,6 @@
                                       <input type="checkbox" name="yop" value="yop">Year of position<br>
                                       </form>
                                 </div>
-                                <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabResearch" style ="display:none">
-                                        <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
-                                        <form action="">
-                                        <input type="checkbox" name="id" value="id">Student ID<br>
-                                        <input type="checkbox" name="name" value="name">Name<br>
-                                        <input type="checkbox" name="surname" value="surname">Surname<br>
-                                        <input type="checkbox" name="department" value="department">Department<br>
-                                        <input type="checkbox" name="faculty" value="faculty">Faculty<br>
-                                        <input type="checkbox" name="position" value="position">Position<br>
-                                        <input type="checkbox" name="yop" value="yop">Year of position<br>
-                                        </form>
-                                  </div>
 
                       <div class ="w3-margin-left w3-round w3-container w3-grey" id="filtertab" style ="display:none">
                               <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
@@ -145,11 +138,11 @@
                               Value : <input type="text" name="fname">
                                 Operation :
                               <select>
-                              <option value="greater"> <var>></var> </option>
-                              <option value="less"> <var><</var> </option>
-                              <option value="equal"><var>=</var></option>
-                              <option value="lessequal"> <var><=</var> </option>
-                              <option value="greaterequal"><var>>=</var></option>
+                                <option value="greater"> <var>></var> </option>
+                                <option value="less"> <var><</var> </option>
+                                <option value="equal"><var>=</var></option>
+                                <option value="lessequal"> <var><=</var> </option>
+                                <option value="greaterequal"><var>>=</var></option>
                               </select>
                               </p>
 
@@ -166,52 +159,50 @@
                     </div>
                   </div>
               </div>
-              <script>
-                function toggle(button,input) {
-                  var x = document.getElementById(input);
-                  var y = document.getElementById(button);
-                  if (x.style.display === 'none') {
-                      x.style.display = 'block';
-                      y.style.background = '#bbb'
-                  } else {
-                      x.style.display = 'none';
-                      y.style.background = '#2196F3'
-                  }
-              }
-                function show(){
-                  document.getElementById('table').style.display='block';
-                }
-                function hide(tab){
-                  var x = ['tab_student','tab_teacher','tab_scholarship','tab_tution','tab_dean']
-                  document.getElementById('table').style.display='none';
-                  for (i = 0;i<5;i++){
-                    if(x[i] == tab) {
-                    document.getElementById(x[i]).style.background = '#bbb';}
-                    else{
-                    document.getElementById(x[i]).style.background = '#2196F3';}
-                  }
-
-                }
-              </script>
     {% endblock %}
     {% block add_column %}
 
     {% endblock %}
     {% block filter%}{% endblock %}
     {% block table%}{% endblock %}
-
-    <script
-      src="https://code.jquery.com/jquery-2.2.4.min.js"
-      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-      crossorigin="anonymous"></script>
-    <script>
-    $("input").click(){
-    $('input:checked').map(function() {
-       return ([$(this).val,0,0]);
-    }).get();
-    alert(checkValues);
-    }
-    </script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </body>
-  </html>
+  <script>
+    function toggle(button,input) {
+      var x = document.getElementById(input);
+      var y = document.getElementById(button);
+      if (x.style.display === 'none') {
+          x.style.display = 'block';
+          y.style.background = '#bbb'
+      } else {
+          x.style.display = 'none';
+          y.style.background = '#2196F3'
+      }
+  }
+    function show(){
+      document.getElementById('table').style.display='block';
+    }
+    function hide(tab){
+      var x = ['tab_student','tab_teacher','tab_scholarship','tab_tution','tab_dean']
+      document.getElementById('table').style.display='none';
+      for (i = 0;i<5;i++){
+        if(x[i] == tab) {
+        document.getElementById(x[i]).style.background = '#bbb';}
+        else{
+        document.getElementById(x[i]).style.background = '#2196F3';}
+      }
+
+    }
+  </script>
+  <script
+    src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+  <script>
+  $("input").click(){
+  $('input:checked').map(function() {
+     return ([$(this).val,0,0]);
+  }).get();
+  alert(checkValues);
+}
+  </script>
+</html>

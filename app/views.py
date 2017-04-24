@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Person
+#from .models import Person
 from . import views
 from django.http import JsonResponse
 
