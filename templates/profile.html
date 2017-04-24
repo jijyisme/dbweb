@@ -229,10 +229,17 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
 <script>
     $(function() {
         $("#apply").on('click',function(){
-            $.ajax({
-              type: "GET",
-              url: "~/secondpage/views.py",
-
+           $.ajax({
+                url: '{% url "validate" %}',
+                data: {
+                    'id' : 'AA'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.valid) {
+                        # do something
+                    }
+                }
             });
         var header = '<thead><tr class="w3-blue"><th>ID</th><th>Name</th><th>Age</th></tr></thead>'
         var data = [

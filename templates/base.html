@@ -1,5 +1,9 @@
+<<<<<<< HEAD
   {% load staticfiles %}
 
+=======
+{% load staticfiles %}
+>>>>>>> 92c2f0cf4e002abc98734c2cfee6e3640174e83a
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +21,7 @@
     <script  src="{% static 'bootstrap/bootstrap-3.3.7/js/bootstrap.min.js' %}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
         html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
     </style>
@@ -87,22 +92,42 @@
           <div class="w3-bar w3-grey" style = "margin:100px 10px 0px">
           </div>
           <!--TAB-->
+<<<<<<< HEAD
           <div class="w3-container w3-light-blue ">
+=======
+          <div id = "tab" class="w3-blue w3-container ">
+>>>>>>> 92c2f0cf4e002abc98734c2cfee6e3640174e83a
             {% block tab %}{% endblock %}
           </div>
            <!--TABLE SETTING -->
 
+<<<<<<< HEAD
+=======
+                  <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                    <button id = "addcolumn_btn" class="w3-button w3-round w3-text-white flip">Add Column</button>
+                  </div>
+                  <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                    <button id = "filter_btn" class="w3-button w3-round w3-text-white flip">Filter</button>
+                  </div>
+                  <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                    <button id = "apply_btn" class="w3-button w3-round w3-text-white flip">Apply</button>
+                  </div>
+                </div>
+                <div class ="w3-margin-left w3-round w3-container w3-grey" id="addcolumn_pane" style ="display:none">
+                        <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                        <form action="">
+>>>>>>> 92c2f0cf4e002abc98734c2cfee6e3640174e83a
                             {% block add_column %}{% endblock %}
                         </form>
                   </div>
 
-                <div class ="w3-margin-left w3-round w3-container w3-grey" id="filtertab" style ="display:none">
+                <div class ="w3-margin-left w3-round w3-container w3-grey" id="filter_pane" style ="display:none">
                         <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
                         {% block filter%}{% endblock %}
                 </div>
 
 
-            <div id = "table" class =w3-container style="display:block">
+            <div id = "table" class =w3-container>
 
                 <table  id = "table_data" style="margin-top:50px " class="w3-table-all w3-hoverable">
                     {% block table%}{% endblock %}
@@ -127,5 +152,14 @@
   <i class="fa fa-twitter w3-hover-opacity"></i>
   <p>Powered by <a href="" target="_blank">General AMR</a></p>
 </footer>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="{% static 'js/table.js' %}"></script>
+<script>
+{% block action %}{% endblock %}
+</script>
 </html>
+
+<<<<<<< HEAD
+</html>
+=======
+>>>>>>> 92c2f0cf4e002abc98734c2cfee6e3640174e83a
