@@ -36,7 +36,7 @@
                   {% block name %}{% endblock %}
               </div>
               {% block profile %}{% endblock %}
-              <button class="w3-button w3-blue w3-text-white w3-bar-item w3-round-large">Sign Out<i class="fa fa-sign-out fa-fw w3-margin-right w3-large w3-text-white"></i></button>
+              <button id = 'signout_btn' class="w3-button w3-blue w3-text-white w3-bar-item w3-round-large">Sign Out<i class="fa fa-sign-out fa-fw w3-margin-right w3-large w3-text-white"></i></button>
                   <hr>
           </div>
       </div><br>
@@ -45,8 +45,7 @@
     <div class="w3-threequarter">
       <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Information Center</h2>
-          <div class="w3-bar w3-grey" style = "margin:100px 10px 0px">
-          </div>
+
           <!--TAB-->
           <div id = "tab" class="w3-blue w3-container ">
             {% block tab %}{% endblock %}
@@ -65,18 +64,16 @@
                   </div>
                 </div>
 
-                            {% block add_column %}{% endblock %}
+                {% block add_column %}{% endblock %}
 
-                <div class ="w3-margin-left w3-round w3-container w3-grey" id="filter_pane" style ="display:none">
-                        <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
-                        {% block filter%}{% endblock %}
-                </div>
-            <div id = "table" class =w3-container>
+                {% block filter%}{% endblock %}
+        </div>
+        <div id = "table" class =w3-container>
                 <table  id = "table_data" style="margin-top:50px " class="w3-table-all w3-hoverable">
                     {% block table%}{% endblock %}
                 </table>
-            </div>
         </div>
+      </div>
       </div>
     <!-- End Right Column -->
     </div>
