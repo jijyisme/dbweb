@@ -1,5 +1,6 @@
 
-var sel_tab = "";
+var sel_tab = "tab_student";
+var tname = "student";
 var filter_detail = [['id','0','0'],['name','0','0'],['age','0','0']];
 function drawTable(data){
 // create header
@@ -22,12 +23,13 @@ function drawTable(data){
         $('#table_data').html(header+rows);
 }
 
-$("input").click(){
-    $('input:checked').map(function() {
-       filter_detail.push([$(this).val,0,0]);
-    });
-}
-$("#table").hide();
+$(":input").click(function(){
+    filter_detail = [];
+   $('input:checked').map(function() {
+      filter_detail.push([this.value,0,0]);
+   });
+
+});
 $("#apply_btn").click(function(){
 
     $.ajax({
@@ -39,19 +41,26 @@ $("#apply_btn").click(function(){
        $("#table").show();
        }
     });
+    console.log(sel_tab);
+    for(var i=0;i<filter_detail.length;i++){
+      console.log(filter_detail[i]);
+    }
 
 });
 
-//assign selected tab
-$("class_of_tab").click(function(){
-    sel_tab = "";
-    $("#addcolumn_pane"+"_"+sel_tab).hide();
+//assign selected tab & reset selected filter
+$(".btn-warning").click(function(){
+
+    filter_detail = [];
+    $("#addtab"+tname).hide();
     $("#filter_pane").hide();
     $("#table").hide();
+    sel_tab = this.id;
+    tname = sel_tab.substring(4);
+
 });
 $("#addcolumn_btn").click(function(){
-
-    $("#addcolumn_pane"+sel_tab).toggle();
+    $("#addtab"+tname).toggle();
 
 });
 $("#filter_btn").click(function(){
