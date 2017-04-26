@@ -1,4 +1,4 @@
-#from django.db import models
+from django.db import models
 
 # Create your models here.
 
@@ -30,6 +30,7 @@ class Student(models.Model):
     s_email = models.CharField(max_length=30)
     s_address = models.CharField(max_length=100)
     s_password = models.CharField(max_length=16)
+    s_gpax = models.DecimalField(max_digits=3, decimal_places=2)
 
 class Activity(models.Model):
     a_id = models.CharField(max_length=10, primary_key=True, default="0000000000")
