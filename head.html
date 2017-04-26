@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+  <header>
+    <title>officer</title>
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
+    {% extends "base.html" %}
+    {% load staticfiles %}
+
+
+    <style>
+    html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
+    </style>
+  </header>
+  <body class="w3-light-grey">
+
+    {% block name %}{% endblock %}
+    {% block profile %}{% endblock %}
+    {% block tab %}
+    <table  style="margin-top:50px " class="w3-table-all w3-hoverable" id="ruj-table">
+
+                </table>
+
+
+        <!-- Right Column -->
+
+              <div class="w3-container w3-light-blue" >
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#tabStudent" data-toggle="tab">ข้อมูลส่วนตัวนิสิต</a></li>
+                       <li><a href="#tabEnroll" data-toggle="tab">ประวัติการลงทะเบียนเรียน</a></li>
+                       <li><a href="#tabActivity" data-toggle="tab">ประวัติการเข้าร่วมกิจกรรม</a></li>
+                        <li><a href="#tabIntern" data-toggle="tab">ประวัติการฝึกงาน</a></li>
+                         <li><a href="#tabAward" data-toggle="tab">ประวัติการรับรางวัล</a></li>
+                         <li><a href="#tabResearch" data-toggle="tab">Research</a></li>
+                         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Report</button>
+
+                         <!--Modal-->
+
+                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                </div>
+                                <div class="modal-body">
+                                  Graph!!
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                       <div class="panel-body">
+                           <div class="tab-content">
+                               <div class="tab-pane fade in active" id="tabStudent">
+
+                                  <!--Table-->
+                                    <div class="w3-container " style="height:1200px">
+                                          <div class="w3-bar" style = "margin:10px 10px 0px">
+
+
+                                            <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                              <button id = "addcolumn" class="btn btn-default" onclick="toggle('addcolumn','addtabStudent')">Add Column</button>
+                                            </div>
+                                            <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                              <button id = "filter" class="btn btn-default" onclick="toggle('filter','filtertab')">Filter</button>
+                                            </div>
+                                            <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                              <button id = "apply" class="btn btn-default" onclick="show()">Apply</button>
+                                            </div>
+                                          </div>
+                                          <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabStudent" style ="display:none">
+                                                  <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                                                  <form action="">
+                                                  <input type="checkbox" name="id" value="id">Student ID<br>
+                                                  <input type="checkbox" name="name" value="name">Name<br>
+                                                  <input type="checkbox" name="surname" value="surname">Surname<br>
+                                                  <input type="checkbox" name="department" value="department">Department<br>
+                                                  <input type="checkbox" name="faculty" value="faculty">Faculty<br>
+                                                  <input type="checkbox" name="address" value="address">Address<br>
+                                                  <input type="checkbox" name="tel" value="tel">Tel<br>
+                                                  <input type="checkbox" name="email" value="email">Email<br>
+                                                  <input type="checkbox" name="year" value="year">Year<br>
+                                                  <input type="checkbox" name="teacher" value="teacher">Teacher<br>
+                                                  </form>
+                                        </div>
+
+                                        <div class ="w3-margin-left w3-round w3-container w3-grey" id="filtertab" style ="display:none">
+                                                <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
+                                                <p>Column :
+                                                <select>
+                                                  <option value="Name">Name</option>
+                                                  <option value="Surname">Surname</option>
+                                                  <option value="GPAX">GPAX</option>
+                                                </select>
+                                                Value : <input type="text" name="fname">
+                                                  Operation :
+                                                <select>
+                                                <option value="greater"> <var>></var> </option>
+                                                <option value="less"> <var><</var> </option>
+                                                <option value="equal"><var>=</var></option>
+                                                <option value="lessequal"> <var><=</var> </option>
+                                                <option value="greaterequal"><var>>=</var></option>
+                                                </select>
+                                                </p>
+
+                                          <p><a href="https://www.w3schools.com/w3css/default.asp" target="_blank">add more</a></p>
+                                          </div>
+
+                            </div>
+                               </div>
+                               <div class="tab-pane fade" id="tabEnroll">
+
+                                 <!--Table-->
+                                   <div class="w3-container " style="height:1200px">
+                                         <div class="w3-bar" style = "margin:10px 10px 0px">
+
+
+                                           <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                             <button id = "addcolumn" class="btn btn-default" onclick="toggle('addcolumn','addtabEnroll')">Add Column</button>
+                                           </div>
+                                           <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                             <button id = "filter" class="btn btn-default" onclick="toggle('filter','filtertab')">Filter</button>
+                                           </div>
+                                           <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                             <button id = "apply" class="btn btn-default" onclick="show()">Apply</button>
+                                           </div>
+                                         </div>
+                                          <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabEnroll" style ="display:none">
+                                                 <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                                                 <form action="">
+                                                 <input type="checkbox" name="id" value="id">Student ID<br>
+                                                 <input type="checkbox" name="name" value="name">Name<br>
+                                                 <input type="checkbox" name="surname" value="surname">Surname<br>
+                                                 <input type="checkbox" name="enroll" value="enroll">Enroll<br>
+                                                 </form>
+                                           </div>
+
+                                           <div class ="w3-margin-left w3-round w3-container w3-grey" id="filtertab" style ="display:none">
+                                                   <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
+                                                   <p>Column :
+                                                   <select>
+                                                     <option value="Name">Name</option>
+                                                     <option value="Surname">Surname</option>
+                                                     <option value="GPAX">GPAX</option>
+                                                   </select>
+                                                   Value : <input type="text" name="fname">
+                                                     Operation :
+                                                   <select>
+                                                   <option value="greater"> <var>></var> </option>
+                                                   <option value="less"> <var><</var> </option>
+                                                   <option value="equal"><var>=</var></option>
+                                                   <option value="lessequal"> <var><=</var> </option>
+                                                   <option value="greaterequal"><var>>=</var></option>
+                                                   </select>
+                                                   </p>
+
+                                             <p><a href="https://www.w3schools.com/w3css/default.asp" target="_blank">add more</a></p>
+                                             </div>
+                                      </div>
+                               </div>
+                               <div class="tab-pane fade" id="tabActivity">
+
+                                   <!--Table-->
+                                     <div class="w3-container " style="height:1200px">
+                                           <div class="w3-bar" style = "margin:10px 10px 0px">
+
+
+                                             <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                               <button id = "addcolumn" class="btn btn-default" onclick="toggle('addcolumn','addtabActivity')">Add Column</button>
+                                             </div>
+                                             <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                               <button id = "filter" class="btn btn-default" onclick="toggle('filter','filtertab')">Filter</button>
+                                             </div>
+                                             <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                               <button id = "apply" class="btn btn-default" onclick="show()">Apply</button>
+                                             </div>
+                                           </div>
+
+                                           <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabActivity" style ="display:none">
+                                                   <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                                                   <form action="">
+                                                   <input type="checkbox" name="id" value="id">Student ID<br>
+                                                   <input type="checkbox" name="name" value="name">Name<br>
+                                                   <input type="checkbox" name="surname" value="surname">Surname<br>
+                                                   <input type="checkbox" name="date" value="date">Date<br>
+                                                   <input type="checkbox" name="activity" value="activity">Activity<br>
+                                                   </form>
+                                             </div>
+
+                                             <div class ="w3-margin-left w3-round w3-container w3-grey" id="filtertab" style ="display:none">
+                                                     <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
+                                                     <p>Column :
+                                                     <select>
+                                                       <option value="Name">Name</option>
+                                                       <option value="Surname">Surname</option>
+                                                       <option value="GPAX">GPAX</option>
+                                                     </select>
+                                                     Value : <input type="text" name="fname">
+                                                       Operation :
+                                                     <select>
+                                                     <option value="greater"> <var>></var> </option>
+                                                     <option value="less"> <var><</var> </option>
+                                                     <option value="equal"><var>=</var></option>
+                                                     <option value="lessequal"> <var><=</var> </option>
+                                                     <option value="greaterequal"><var>>=</var></option>
+                                                     </select>
+                                                     </p>
+
+                                               <p><a href="https://www.w3schools.com/w3css/default.asp" target="_blank">add more</a></p>
+                                               </div>
+                                    </div>
+                               </div>
+                               <div class="tab-pane fade" id="tabIntern">
+
+                                   <!--Table-->
+                                     <div class="w3-container " style="height:1200px">
+                                           <div class="w3-bar" style = "margin:10px 10px 0px">
+
+
+                                             <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                               <button id = "addcolumn" class="btn btn-default" onclick="toggle('addcolumn','addtabIntern')">Add Column</button>
+                                             </div>
+                                             <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                               <button id = "filter" class="btn btn-default" onclick="toggle('filter','filtertab')">Filter</button>
+                                             </div>
+                                             <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                               <button id = "apply" class="btn btn-default" onclick="show()">Apply</button>
+                                             </div>
+                                           </div>
+
+                                             <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabIntern" style ="display:none">
+                                                     <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                                                     <form action="">
+                                                     <input type="checkbox" name="id" value="id">Student ID<br>
+                                                     <input type="checkbox" name="name" value="name">Name<br>
+                                                     <input type="checkbox" name="surname" value="surname">Surname<br>
+                                                     <input type="checkbox" name="company" value="company">Company<br>
+                                                     <input type="checkbox" name="compAddress" value="compAddress">Address<br>
+                                                     <input type="checkbox" name="compTel" value="compTel">tel<br>
+                                                     </form>
+                                               </div>
+
+                                               <div class ="w3-margin-left w3-round w3-container w3-grey" id="filtertab" style ="display:none">
+                                                       <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
+                                                       <p>Column :
+                                                       <select>
+                                                         <option value="Name">Name</option>
+                                                         <option value="Surname">Surname</option>
+                                                         <option value="GPAX">GPAX</option>
+                                                       </select>
+                                                       Value : <input type="text" name="fname">
+                                                         Operation :
+                                                       <select>
+                                                       <option value="greater"> <var>></var> </option>
+                                                       <option value="less"> <var><</var> </option>
+                                                       <option value="equal"><var>=</var></option>
+                                                       <option value="lessequal"> <var><=</var> </option>
+                                                       <option value="greaterequal"><var>>=</var></option>
+                                                       </select>
+                                                       </p>
+
+                                                 <p><a href="https://www.w3schools.com/w3css/default.asp" target="_blank">add more</a></p>
+                                                 </div>
+                                      </div>
+                               </div>
+                               <div class="tab-pane fade" id="tabAward">
+
+                                 <!--Table-->
+                                   <div class="w3-container " style="height:1200px">
+                                         <div class="w3-bar" style = "margin:10px 10px 0px">
+
+
+                                           <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                             <button id = "addcolumn" class="btn btn-default" onclick="toggle('addcolumn','addtabAward')">Add Column</button>
+                                           </div>
+                                           <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                             <button id = "filter" class="btn btn-default" onclick="toggle('filter','filtertab')">Filter</button>
+                                           </div>
+                                           <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                             <button id = "apply" class="btn btn-default" onclick="show()">Apply</button>
+                                           </div>
+                                         </div>
+
+                                             <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabAward" style ="display:none">
+                                                     <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                                                     <form action="">
+                                                     <input type="checkbox" name="id" value="id">Student ID<br>
+                                                     <input type="checkbox" name="name" value="name">Name<br>
+                                                     <input type="checkbox" name="surname" value="surname">Surname<br>
+                                                     <input type="checkbox" name="award" value="award">Award<br>
+                                                     </form>
+                                               </div>
+
+                                               <div class ="w3-margin-left w3-round w3-container w3-grey" id="filtertab" style ="display:none">
+                                                       <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
+                                                       <p>Column :
+                                                       <select>
+                                                         <option value="Name">Name</option>
+                                                         <option value="Surname">Surname</option>
+                                                         <option value="GPAX">GPAX</option>
+                                                       </select>
+                                                       Value : <input type="text" name="fname">
+                                                         Operation :
+                                                       <select>
+                                                       <option value="greater"> <var>></var> </option>
+                                                       <option value="less"> <var><</var> </option>
+                                                       <option value="equal"><var>=</var></option>
+                                                       <option value="lessequal"> <var><=</var> </option>
+                                                       <option value="greaterequal"><var>>=</var></option>
+                                                       </select>
+                                                       </p>
+
+                                                 <p><a href="https://www.w3schools.com/w3css/default.asp" target="_blank">add more</a></p>
+                                                 </div>
+                                          </div>
+
+                                      <div class="tab-pane fade" id="tabResearch">
+
+                                            <!--Table-->
+                                              <div class="w3-container " style="height:1200px">
+                                                    <div class="w3-bar" style = "margin:10px 10px 0px">
+
+
+                                                      <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                                        <button id = "addcolumn" class="btn btn-default" onclick="toggle('addcolumn','addtabResearch')">Add Column</button>
+                                                      </div>
+                                                      <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                                        <button id = "filter" class="btn btn-default" onclick="toggle('filter','filtertab')">Filter</button>
+                                                      </div>
+                                                      <div class="w3-dropdown-hover w3-round w3-blue w3-margin-right">
+                                                        <button id = "apply" class="btn btn-default" onclick="show()">Apply</button>
+                                                      </div>
+                                                    </div>
+
+                                                        <div class ="w3-margin-left w3-round w3-container w3-grey" id="addtabResearch" style ="display:none">
+                                                                <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
+                                                                <form action="">
+                                                                <input type="checkbox" name="id" value="id">Student ID<br>
+                                                                <input type="checkbox" name="name" value="name">Name<br>
+                                                                <input type="checkbox" name="surname" value="surname">Surname<br>
+                                                                <input type="checkbox" name="research" value="research">Research<br>
+                                                                <input type="checkbox" name="teacherName" value="teacherName">Teacher<br>
+                                                                </form>
+                                                          </div>
+
+                                                          <div class ="w3-margin-left w3-round w3-container w3-grey" id="filtertab" style ="display:none">
+                                                                  <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
+                                                                  <p>Column :
+                                                                  <select>
+                                                                    <option value="Name">Name</option>
+                                                                    <option value="Surname">Surname</option>
+                                                                    <option value="GPAX">GPAX</option>
+                                                                  </select>
+                                                                  Value : <input type="text" name="fname">
+                                                                    Operation :
+                                                                  <select>
+                                                                  <option value="greater"> <var>></var> </option>
+                                                                  <option value="less"> <var><</var> </option>
+                                                                  <option value="equal"><var>=</var></option>
+                                                                  <option value="lessequal"> <var><=</var> </option>
+                                                                  <option value="greaterequal"><var>>=</var></option>
+                                                                  </select>
+                                                                  </p>
+
+                                                            <p><a href="https://www.w3schools.com/w3css/default.asp" target="_blank">add more</a></p>
+                                                            </div>
+                                                     </div>
+
+                               </div>
+                           </div>
+                       </div>
+                    </ul>
+                </div>
+
+
+                  <div id = "table" class =w3-container style="display:block">
+
+                      <table  id = "table_data" style="margin-top:50px " class="w3-table-all w3-hoverable">
+
+
+                      </table>
+                    </div>
+                  </div>
+              </div>
+              <script>
+                function toggle(button,input) {
+                  var x = document.getElementById(input);
+                  var y = document.getElementById(button);
+                  if (x.style.display === 'none') {
+                      x.style.display = 'block';
+                      y.style.background = '#bbb'
+                  } else {
+                      x.style.display = 'none';
+                      y.style.background = '#2196F3'
+                  }
+              }
+                function show(){
+                  document.getElementById('table').style.display='block';
+                }
+                function hide(tab){
+                  var x = ['tab_student','tab_teacher','tab_scholarship','tab_tution','tab_dean']
+                  document.getElementById('table').style.display='none';
+                  for (i = 0;i<5;i++){
+                    if(x[i] == tab) {
+                    document.getElementById(x[i]).style.background = '#bbb';}
+                    else{
+                    document.getElementById(x[i]).style.background = '#2196F3';}
+                  }
+
+                }
+              </script>
+    {% endblock %}
+    {% block add_column %}
+
+    {% endblock %}
+    {% block filter%}{% endblock %}
+    {% block table%}{% endblock %}
+
+    <script>
+    $("input").click(){
+    $('input:checked').map(function() {
+       return ([$(this).val,0,0]);
+    }).get();
+    alert(checkValues);
+    }
+    </script>
+
+  </body>
+  </html>
