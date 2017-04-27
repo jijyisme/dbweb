@@ -4,34 +4,49 @@ var tname = "student";
 var filter_detail = [];
 var temp = [];
 
-// for testing drawTable()
-// data = [
-//   {id: '1', name: 'a'},
-//   {id: '2', name: 'b'},
-//   {id: '3', name: 'c'}
-// ];
-// temp = ['id','name'];
+//for testing drawTable()
+
 
 function drawTable(data){
+  $('#table_data tr').remove();
+  data = [
+    {id: '1', name: 'a'},
+    {id: '2', name: 'b'},
+    {id: '3', name: 'c'}
+  ];
 // create header
         temp = filter_detail;
         var header = '<thead><tr class="w3-blue">';
         for(var i=0; i<temp.length; i++){
-            header += '<th>'+temp[i].toUpperCase()+'</th>';
+            header += '<th>'+temp[i][0].toUpperCase()+'</th>';
         }
         header += '</tr></thead>';
-
+        $('#table_data').append(header);
 // create rows
-        var rows = '';
+        var rows;
         for(var i=0; i<data.length; i++) {
-            rows += '<tr>';
+            //rows += '<tr>';
+            rows = $("<tr>",{id:data[i]['id']});
+            rows.click(function(){
+              console.log(this.id);
+              if(sel_tab == 'tab_student'){getStudentData(this.id);}
+
+            });
+            rows.mouseover(function(){
+              $(this).toggleClass("w3-grey w3-text-white");
+            });
+            rows.mouseout(function(){
+              $(this).toggleClass("w3-grey w3-text-white");
+            });
             for(var j=0; j<temp.length; j++){
-            rows += '<td>' + data[i][temp[j]] + '</td>';
+            //rows += '<td>' + data[i][temp[j][0]] + '</td>';
+            rows.append('<td>' + data[i][temp[j][0]] + '</td>');
             }
-            rows += '</tr>';
+            //rows += '</tr>';
+            $('#table_data').append(rows);
         }
 
-        $('#table_data').html(header+rows);
+        //$('#table_data').append(header+rows);
 }
 function drawFilterTab(){
 $("#filtertab_detail").empty();
@@ -60,12 +75,43 @@ for(var i=0; i<filter_detail.length; i++){
 
 }
 
+function drawPersonalData(data){
+  $("#pd_name").append('name');
+  $("#pd_year").append(data['name']);
+  $("#pd_department").append(data['name']);
+  $("#pd_faculty").append(data['name']);
+  $("#pd_tel_no").append(data['name']);
+  $("#pd_email").append(data['name']);
+  $("#pd_gpax").append(data['name']);
+  $("#pd_proj_name").append(data['name']);
+  $("#pd_proj_field").append(data['name']);
+  $("#pd_proj_advisor").append(data['name']);
+  $("#pd_proj_type").append(data['name']);
+  $("#pd_scholar").append(data['name']);
+  $("#pd_scholar_period").append(data['name']);
+  $("#pd_comp").append(data['name']);
+  $("#pd_intern_period").append(data['name']);
+  $("#table_data").show();
 
+}
+function getStudentData(s_id){
+  console.log(s_id);
+  $.ajax({
+    type: "GET",
+    url: "/home/query",
+    data: {func:'student_info',id: s_id},
+    success: function(response) {
+     drawPersonalData(response);
+     }
+  });
+}
 $(":checkbox").click(function(){
+    console.log("check");
     filter_detail = [];
    $('input:checked').map(function() {
       filter_detail.push([this.value,'none','none']);
    });
+   console.log(filter_detail);
    drawFilterTab();
 
 });
@@ -76,6 +122,8 @@ $("#apply_btn").click(function(){
   for(var i=0;i<filter_detail.length;i++){
     filter_detail[i][2] = $("#textbox"+i).val();
   }
+  $("#student_profile").hide();
+
 //send request to view.py
     $.ajax({
       type: "GET",
@@ -102,6 +150,7 @@ $(".btn-warning").click(function(){
     $("#addtab"+tname).hide();
     $("#filtertab").hide();
     $("#table").hide();
+    $("#student_profile").hide();
     sel_tab = this.id;
     tname = sel_tab.substring(4);
 

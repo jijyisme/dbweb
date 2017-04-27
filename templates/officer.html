@@ -13,7 +13,7 @@
 </div>
 {% endblock %}
 {% block add_column %}
-<div class ="w3-margin-left w3-round w3-container w3-light-grey" id="addtabstudent" style ="display:none">
+<div class ="w3-margin-left w3-round w3-container w3-card-2 w3-light-grey" id="addtabstudent" style ="display:none">
                               <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                               <form action="">
                               <input type="checkbox" name="id" value="id">Student ID<br>
@@ -28,7 +28,7 @@
                               <input type="checkbox" name="teacher" value="teacher">Teacher<br>
                               </form>
 </div>
-<div class ="w3-margin-left w3-round w3-container w3-light-grey" id="addtabteacher" style ="display:none">
+<div class ="w3-margin-left w3-round w3-container w3-card-2 w3-light-grey" id="addtabteacher" style ="display:none">
                                 <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                                 <form action="">
                                 <input type="checkbox" name="teacherID" value="id">Teacher ID<br>
@@ -41,7 +41,7 @@
                                 <input type="checkbox" name="email" value="email">Email<br>
                                 </form>
 </div>
-<div class ="w3-margin-left w3-round w3-container w3-light-grey" id="addtabscholarship" style ="display:none">
+<div class ="w3-margin-left w3-round w3-container w3-card-2 w3-light-grey" id="addtabscholarship" style ="display:none">
                                   <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                                   <form action="">
                                   <input type="checkbox" name="scholarID" value="id">Scholarship ID<br>
@@ -56,7 +56,7 @@
 
                                   </form>
 </div>
-<div class ="w3-margin-left w3-round w3-container w3-light-grey" id="addtabtuition" style ="display:none">
+<div class ="w3-margin-left w3-round w3-container w3-card-2 w3-light-grey" id="addtabtuition" style ="display:none">
                                     <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                                     <form action="">
                                     <input type="checkbox" name="id" value="id">Student ID<br>
@@ -68,7 +68,7 @@
                                     <input type="checkbox" name="status" value="status">Status<br>
                                     </form>
 </div>
-<div class ="w3-margin-left w3-round w3-container w3-light-grey" id="addtabdean" style ="display:none">
+<div class ="w3-margin-left w3-round w3-container w3-card-2 w3-light-grey" id="addtabdean" style ="display:none">
                                       <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                                       <form action="">
                                       <input type="checkbox" name="id" value="id">Student ID<br>
@@ -82,27 +82,21 @@
 </div>
 {% endblock %}
 {% block filter%}
-  <div class ="w3-margin-left w3-round w3-container w3-grey" id="filtertab" style ="display:none">
+  <div class ="w3-margin-left w3-round w3-container w3-card-2 w3-grey" id="filtertab" style ="display:none">
       <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
-                                                       <p>Column :
-                                                       <select>
-                                                         <option value="Name">Name</option>
-                                                         <option value="Surname">Surname</option>
-                                                         <option value="GPAX">GPAX</option>
-                                                       </select>
-                                                       Value : <input type="text" name="fname">
-                                                         Operation :
-                                                       <select>
-                                                       <option value="greater"> <var>></var> </option>
-                                                       <option value="less"> <var><</var> </option>
-                                                       <option value="equal"><var>=</var></option>
-                                                       <option value="lessequal"> <var><=</var> </option>
-                                                       <option value="greaterequal"><var>>=</var></option>
-                                                       </select>
-                                                       </p>
+      <!-- Operation :<select class='test' onclick="test">
+        <option value='none'> None </option>
+        <option value='>'> Greater </option>
+        <option value='<'> Less </option>
+        <option value='='> Equal </option>
+        <option value='>='> Greater or Equal</option>
+        <option value='<='>Less or Equal</option>
+        </select> -->
+              <div id="filtertab_detail">
+              </div>
 
-                                                 <p><a href="https://www.w3schools.com/w3css/default.asp" target="_blank">add more</a></p>
-                                                 </div>
+
+
 {% endblock %}
 {% block table%}{% endblock %}
 {% block action %}

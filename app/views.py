@@ -66,14 +66,14 @@ def query(request):
         'teacher' : {
             'ประวัติลงทะเบียนเรียน' :
                 '''
-                SELECT * FROM app_enrollment Enroll, app_student S, app_course C 
-                WHERE S.s_id = Enroll.s_id AND C.c_id = Enroll.c_id 
-                AND S.s_id IN (SELECT S.s_id FROM app_student S, app_professor P, app_supervise Supervise 
+                SELECT * FROM app_enrollment Enroll, app_student S, app_course C
+                WHERE S.s_id = Enroll.s_id AND C.c_id = Enroll.c_id
+                AND S.s_id IN (SELECT S.s_id FROM app_student S, app_professor P, app_supervise Supervise
                 WHERE S.s_id = Supervise.s_id AND P.p_id = Supervise.p_id AND P.p_id = %s);
                 ''',
             'ข้อมูลส่วนตัวนิสิต' :
                 '''
-                SELECT * FROM app_student S, app_professor P, app_supervise Supervise 
+                SELECT * FROM app_student S, app_professor P, app_supervise Supervise
                 WHERE S.s_id = Supervise.s_id AND P.p_id = Supervise.p_id AND P.p_id = %s
                 ''',
         },

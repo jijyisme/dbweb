@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-3.3.7/css/bootstrap-theme.min.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-3.3.7/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-3.3.7/css/bootstrap.min.css' %}">
-    <script src="bootstrap/bootstrap-3.3.7/js/bootstrap.js"> </script>
-    <script src="bootstrap/bootstrap-3.3.7/js/bootstrap.min.js"> </script>
+   <!-- <script src="{% static 'bootstrap/bootstrap-3.3.7/js/bootstrap.js' %}"> </script>
+    <script src="{% static 'bootstrap/bootstrap-3.3.7/js/bootstrap.min.js' %}"> </script>-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
@@ -68,10 +68,50 @@
 
                 {% block filter%}{% endblock %}
         </div>
-        <div id = "table" class =w3-container>
-                <table  id = "table_data" style="margin-top:50px " class="w3-table-all w3-hoverable">
+        <div id = "table" class ="w3-container w3-white" >
+                <table  id = "table_data" style="margin-top:50px height:200px " class="w3-table-all w3-hoverable w3-card-2 w3-round">
                     {% block table%}{% endblock %}
                 </table>
+        </div>
+        <div id = "student_profile" class="w3-row-padding w3-container w3-card-2 w3-white w3-margin-bottom w3-margin-top w3-round" style='display:none'>
+            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>ชวิศา ธรรมจรัส</h2>
+            <div class="w3-container w3-third">
+              <h5 id = 'pd_sid' class="w3-opacity"><b>รหัสนิสิต</h5>
+              <p id = 'pd_name'>ชื่อ </p>
+              <p id = 'pd_year'>ชั้นปี </p>
+              <p id = 'pd_gpax'>GPAX </p>
+              <p id = 'pd_department'>ภาค </p>
+              <p id = 'pd_faculty'>คณะ </p>
+              <p id = 'pd_tel_no'>เบอร์ติดต่อ </p>
+              <p id = 'pd_email'>E-mail </p>
+
+              <hr>
+            </div>
+
+            <div class="w3-container w3-third">
+              <h5 class="w3-opacity"><b>ประวัติการฝึกงาน</b></h5>
+              <h6 id = 'pd_intern_period' class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>ภาคการศึกษาที่ฝึก</h6>
+              <p id = 'pd_comp'>ชื่อบริษัท </p>
+              <h5 class="w3-opacity"><b>ทุนการศึกษา</b></h5>
+              <h6 id = 'pd_scholar_period' class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>ระยะเวลา</h6>
+              <pid = 'pd_scholar'>ชื่อทุนการศึกษา</p>              <br>
+            </div>
+
+            <div class="w3-container w3-third">
+              <h5 class="w3-opacity"><b>Project</b></h5>
+              <h6 id = 'pd_proj_type' class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>ประเภทซีเนียหรือธีสิส</h6>
+              <p id = 'pd_proj_name'>ชื่อโปรเจค</p>
+              <p id = 'pd_proj_field'>หัวข้อ</p>
+              <p id = 'pd_proj_advisor'>อาจารย์ที่ปรึกษาโครงการ</p>
+              <br>
+            </div>
+            <div class="w3-container">
+              <h5 class="w3-opacity"><b>ประวัติการลงทะเบียนเรียน<b></h5>
+                <table  id = "student_profile_table" style="margin-top:50px height:200px " class="w3-table-all w3-hoverable w3-card-2 w3-round">
+
+                </table>
+              <hr>
+            </div>
         </div>
       </div>
       </div>
