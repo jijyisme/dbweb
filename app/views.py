@@ -241,3 +241,4 @@ def head(request) :
     return render(request, 'head.html')
 def officer(request) :
     return render(request, 'officer.html')
+
