@@ -5,7 +5,7 @@
 {% block profile %}{% endblock %}
 {% block tab %}
 <div class="w3-blue w3-container">
-    <button id = "tab_student"class="btn btn-success ">ข้อมูลส่วนตัวนิสิต</button>
+    <button id = "tab_student"class="btn btn-warning ">ข้อมูลส่วนตัวนิสิต</button>
     <button id = "tab_teacher"class="btn btn-warning" >ข้อมูลคณาจารย์</button>
     <button id = "tab_scholarship"class="btn btn-warning ">ประวัติการรับทุนการศึกษา</button>
     <button id = "tab_tuition"class="btn btn-warning">ประวัติการชำระค่าเล่าเรียน</button>
@@ -13,98 +13,94 @@
 </div>
 {% endblock %}
 {% block add_column %}
-<div class ="w3-margin-left w3-round w3-container w3-light-grey" id="addtabstudent" style ="display:none">
+<div class ="w3-margin-left w3-round w3-container w3-card-2 w3-light-grey" id="addtabstudent" style ="display:none">
                               <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                               <form action="">
-                              <input type="checkbox" name="id" value="id">Student ID<br>
-                              <input type="checkbox" name="name" value="name">Name<br>
-                              <input type="checkbox" name="surname" value="surname">Surname<br>
-                              <input type="checkbox" name="department" value="department">Department<br>
-                              <input type="checkbox" name="faculty" value="faculty">Faculty<br>
-                              <input type="checkbox" name="address" value="address">Address<br>
-                              <input type="checkbox" name="tel" value="tel">Tel<br>
-                              <input type="checkbox" name="email" value="email">Email<br>
-                              <input type="checkbox" name="year" value="year">Year<br>
-                              <input type="checkbox" name="teacher" value="teacher">Teacher<br>
+                              <input type="checkbox" name="id" value="s_id">Student ID<br>
+                              <input type="checkbox" name="name" value="s_name">Name<br>
+                              <input type="checkbox" name="surname" value="s_surname">Surname<br>
+                              <input type="checkbox" name="department" value="s_department">Department<br>
+                              <input type="checkbox" name="faculty" value="s_faculty">Faculty<br>
+                              <input type="checkbox" name="address" value="s_address">Address<br>
+                              <input type="checkbox" name="tel" value="s_tel">Tel<br>
+                              <input type="checkbox" name="email" value="s_email">Email<br>
+                              <input type="checkbox" name="year" value="s_year">Year<br>
+                              <input type="checkbox" name="teacher" value="p_name">Teacher<br>
                               </form>
 </div>
-<div class ="w3-margin-left w3-round w3-container w3-light-grey" id="addtabteacher" style ="display:none">
+<div class ="w3-margin-left w3-round w3-container w3-card-2 w3-light-grey" id="addtabteacher" style ="display:none">
                                 <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                                 <form action="">
-                                <input type="checkbox" name="teacherID" value="id">Teacher ID<br>
-                                <input type="checkbox" name="teacherName" value="Teachername">Name<br>
-                                <input type="checkbox" name="teachersurname" value="Teachersurname">Surname<br>
-                                <input type="checkbox" name="department" value="department">Department<br>
-                                <input type="checkbox" name="faculty" value="faculty">Faculty<br>
-                                <input type="checkbox" name="address" value="address">Address<br>
-                                <input type="checkbox" name="tel" value="tel">Tel<br>
-                                <input type="checkbox" name="email" value="email">Email<br>
+                                <input type="checkbox" name="teacherID" value="p_id">Teacher ID<br>
+                                <input type="checkbox" name="teacherName" value="p_name">Name<br>
+                                <input type="checkbox" name="teachersurname" value="p_surname">Surname<br>
+                                <input type="checkbox" name="department" value="p_department">Department<br>
+                                <input type="checkbox" name="faculty" value="p_faculty">Faculty<br>
+                                <input type="checkbox" name="address" value="p_address">Address<br>
+                                <input type="checkbox" name="tel" value="p_tel">Tel<br>
+                                <input type="checkbox" name="email" value="p_email">Email<br>
                                 </form>
 </div>
-<div class ="w3-margin-left w3-round w3-container w3-light-grey" id="addtabscholarship" style ="display:none">
+<div class ="w3-margin-left w3-round w3-container w3-card-2 w3-light-grey" id="addtabscholarship" style ="display:none">
                                   <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                                   <form action="">
-                                  <input type="checkbox" name="scholarID" value="id">Scholarship ID<br>
-                                  <input type="checkbox" name="nameScholar" value="nameScholar">Name<br>
-                                  <input type="checkbox" name="type" value="type">Type<br>
-                                  <input type="checkbox" name="value" value="money">Value<br>
-                                  <input type="checkbox" name="id" value="id">Student ID<br>
-                                  <input type="checkbox" name="name" value="name">Name<br>
-                                  <input type="checkbox" name="surname" value="surname">Surname<br>
-                                  <input type="checkbox" name="tel" value="tel">Tel<br>
-                                  <input type="checkbox" name="year" value="year">Year<br>
+                                  <input type="checkbox" name="scholarID" value="sch_id">Scholarship ID<br>
+                                  <input type="checkbox" name="nameScholar" value="sch_name">Name<br>
+                                  <input type="checkbox" name="type" value="sch_type">Type<br>
+                                  <input type="checkbox" name="value" value="sch_value">Value<br>
+                                  <input type="checkbox" name="s_id" value="s_id">Student ID<br>
+                                  <input type="checkbox" name="s_name" value="s_name">Name<br>
+                                  <input type="checkbox" name="s_surname" value="s_surname">Surname<br>
+                                  <input type="checkbox" name="s_tel" value="s_tel">Tel<br>
+                                  <input type="checkbox" name="s_year" value="s_year">Year<br>
 
                                   </form>
 </div>
-<div class ="w3-margin-left w3-round w3-container w3-light-grey" id="addtabtuition" style ="display:none">
+<div class ="w3-margin-left w3-round w3-container w3-card-2 w3-light-grey" id="addtabtuition" style ="display:none">
                                     <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                                     <form action="">
-                                    <input type="checkbox" name="id" value="id">Student ID<br>
-                                    <input type="checkbox" name="name" value="name">Name<br>
-                                    <input type="checkbox" name="surname" value="surname">Surname<br>
-                                    <input type="checkbox" name="department" value="department">Department<br>
-                                    <input type="checkbox" name="faculty" value="faculty">Faculty<br>
+                                    <input type="checkbox" name="s_id" value="s_id">Student ID<br>
+                                    <input type="checkbox" name="s_name" value="s_name">Name<br>
+                                    <input type="checkbox" name="s_surname" value="s_surname">Surname<br>
+                                    <input type="checkbox" name="s_department" value="s_department">Department<br>
+                                    <input type="checkbox" name="s_faculty" value="s_faculty">Faculty<br>
                                     <input type="checkbox" name="year" value="year">Year<br>
                                     <input type="checkbox" name="status" value="status">Status<br>
                                     </form>
 </div>
-<div class ="w3-margin-left w3-round w3-container w3-light-grey" id="addtabdean" style ="display:none">
+<div class ="w3-margin-left w3-round w3-container w3-card-2 w3-light-grey" id="addtabdean" style ="display:none">
                                       <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Select Column</p>
                                       <form action="">
-                                      <input type="checkbox" name="id" value="id">Student ID<br>
-                                      <input type="checkbox" name="name" value="name">Name<br>
-                                      <input type="checkbox" name="surname" value="surname">Surname<br>
-                                      <input type="checkbox" name="department" value="department">Department<br>
-                                      <input type="checkbox" name="faculty" value="faculty">Faculty<br>
+                                      <input type="checkbox" name="p_id" value="p_id">Teacher ID<br>
+                                      <input type="checkbox" name="p_name" value="p_name">Name<br>
+                                      <input type="checkbox" name="p_surname" value="p_surname">Surname<br>
+                                      <input type="checkbox" name="department" value="p_department">Department<br>
+                                      <input type="checkbox" name="faculty" value="p_faculty">Faculty<br>
                                       <input type="checkbox" name="position" value="position">Position<br>
                                       <input type="checkbox" name="yop" value="yop">Year of position<br>
                                       </form>
 </div>
 {% endblock %}
 {% block filter%}
-  <div class ="w3-margin-left w3-round w3-container w3-grey" id="filtertab" style ="display:none">
+  <div class ="w3-margin-left w3-round w3-container w3-card-2 w3-grey" id="filtertab" style ="display:none">
       <p><i class="fa fa-gear fa-fw w3-large w3-text-white"></i>Assign value</p>
-                                                       <p>Column :
-                                                       <select>
-                                                         <option value="Name">Name</option>
-                                                         <option value="Surname">Surname</option>
-                                                         <option value="GPAX">GPAX</option>
-                                                       </select>
-                                                       Value : <input type="text" name="fname">
-                                                         Operation :
-                                                       <select>
-                                                       <option value="greater"> <var>></var> </option>
-                                                       <option value="less"> <var><</var> </option>
-                                                       <option value="equal"><var>=</var></option>
-                                                       <option value="lessequal"> <var><=</var> </option>
-                                                       <option value="greaterequal"><var>>=</var></option>
-                                                       </select>
-                                                       </p>
+      <!-- Operation :<select class='test' onclick="test">
+        <option value='none'> None </option>
+        <option value='>'> Greater </option>
+        <option value='<'> Less </option>
+        <option value='='> Equal </option>
+        <option value='>='> Greater or Equal</option>
+        <option value='<='>Less or Equal</option>
+        </select> -->
+              <div id="filtertab_detail">
+              </div>
 
-                                                 <p><a href="https://www.w3schools.com/w3css/default.asp" target="_blank">add more</a></p>
-                                                 </div>
+
+
 {% endblock %}
 {% block table%}{% endblock %}
 {% block action %}
 
 {% endblock %}
+
+
