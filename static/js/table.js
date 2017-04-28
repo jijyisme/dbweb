@@ -76,7 +76,7 @@ for(var i=0; i<filter_detail.length; i++){
 }
 
 function drawPersonalData(data){
-  $("#pd_name").append('name');
+  $("#pd_name").append(data['name']);
   $("#pd_year").append(data['name']);
   $("#pd_department").append(data['name']);
   $("#pd_faculty").append(data['name']);
@@ -91,17 +91,61 @@ function drawPersonalData(data){
   $("#pd_scholar_period").append(data['name']);
   $("#pd_comp").append(data['name']);
   $("#pd_intern_period").append(data['name']);
-  $("#table_data").show();
+  $("#pd_student_status").append(data['name']);
+  $("#pd_drop_status").append(data['name']);
+  $("#student_profile").show();
+  var enroll = data['enrollment'];
+  // create header
+          temp = ['course id', 'course name', 'grade', 'credit','term/year'];
+          var header = '<thead><tr class="w3-blue">';
+          for(var i=0; i<temp.length; i++){
+              header += '<th>'+temp[i][0].toUpperCase()+'</th>';
+          }
+          header += '</tr></thead>';
+          $('#student_profile_table').append(header);
+  // create rows
+          var rows;
+          for(var i=0; i<data.length; i++) {
+              rows = $("<tr>",{id:enroll[i]['id']});
+              rows.mouseover(function(){
+                $(this).toggleClass("w3-grey w3-text-white");
+              });
+              rows.mouseout(function(){
+                $(this).toggleClass("w3-grey w3-text-white");
+              });
+              for(var j=0; j<temp.length; j++){
+              rows.append('<td>' + enroll[i][temp[j][0]] + '</td>');
+              }
+              $('#student_profile_table').append(rows);
+          }
 
+  }
+
+}
+function drawUserData(data){
+  $("#user_name").append("<h2>"+data['title']+data['name']+"</h2>");
+  $("#user_info").append("<p>"+data['department']+"</p>");
+  $("#user_info").append("<p>"+data['faculty']+"</p>");
+//  $("#user_info").append("<p>"+data['name']+"</p>");
 }
 function getStudentData(s_id){
   console.log(s_id);
   $.ajax({
-    type: "GET",
+    type: "POST",
     url: "/home/query",
     data: {func:'student_info',id: s_id},
     success: function(response) {
      drawPersonalData(response);
+     }
+  });
+}
+function getUserData(id){
+  $.ajax({
+    type: "POST",
+    url: "/home/teacher",
+    data: {func:'user_info'},
+    success: function(response) {
+     drawUserData(response);
      }
   });
 }
@@ -126,7 +170,7 @@ $("#apply_btn").click(function(){
 
 //send request to view.py
     $.ajax({
-      type: "GET",
+      type: "POST",
       url: "/home/teacher",
       data: {tab : sel_tab, filter : filter_detail },
       success: function(response) {
