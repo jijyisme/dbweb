@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .models import *
 import json
 import ast
+import datetime
 
 from . import views
 from django.http import JsonResponse
@@ -15,6 +16,8 @@ from django.views.decorators.csrf import csrf_protect
 class Person:
     id = "",
     type = ""
+class Current:
+    year = datetime.datetime.now().year
 
 # Create your views here.
 def index(request):
@@ -50,75 +53,109 @@ def validate(request):
         'type' : type,
     }
 
-    # assign static value
+    # assign static value by logging in
     Person.id = id
     Person.type = type
 
     return JsonResponse(data)
 
 def query(request):
+    type = 'officer'
+
+    # Receiving object from ajax
+
+def query(request):
 
     lists = request.POST.items()
-    # filter = json.dumps(lists)
-    # print(lists)
-    for i in lists:
-        # print(i, type(i))
-        # print(i[0], type(i[0]))
-        dict = ast.literal_eval(i[0])
-        # print(dict, type(dict))
 
+    for i in lists:
+        dict = ast.literal_eval(i[0])
     print(dict['tab'], dict['filter'])
+
     filters = dict['filter']
+    tab = dict['tab']
+
     selected_columns = []
     for filter in filters:
         selected_columns.append(filter[0])
-    tab = dict['tab']
-
     print(selected_columns)
-
-    # print(filter)
-    # [["id", "none", "none"]]
-    # tab = request.GET.get('tab', None)
-    # print(filter)
-    # print(tab)
+    # [["id", ">", "1"]]
 
     query = {
         'officer' : {
             'tab_student' :
                 '''
-                SELECT * FROM app_student S;
+                SELECT * FROM app_student S
+                JOIN app_department ON app_department.d_id = S.d_id
+                JOIN app_faculty ON app_faculty.f_id = app_department.f_id
+                JOIN app_supervise ON app_supervise.s_id = S.s_id
+                JOIN app_professor ON app_professor.p_id = app_supervise.p_id
+                ''',
+            'tab_teacher':
+                '''
+                SELECT * FROM app_professor P;
+                ''',
+            'tab_scholarship':
+                '''
+                SELECT * FROM app_student S
+                JOIN app_get_scholarship ON app_get_scholarship.s_id = app_scholarship.s_id 
+                JOIN app_scholarship ON app_scholarship.sch_id = app_get_scholarship.sch_id
+                JOIN app_semester ON app_semester.id = app_get_scholarship.term_year_id;
                 ''',
         },
         'teacher' : {
-            'ประวัติลงทะเบียนเรียน' :
+            'tab_enroll' :
                 '''
                 SELECT * FROM app_enrollment Enroll, app_student S, app_course C
                 WHERE S.s_id = Enroll.s_id AND C.c_id = Enroll.c_id
                 AND S.s_id IN (SELECT S.s_id FROM app_student S, app_professor P, app_supervise Supervise
                 WHERE S.s_id = Supervise.s_id AND P.p_id = Supervise.p_id AND P.p_id = %s);
                 ''',
-            'ข้อมูลส่วนตัวนิสิต' :
+            'tab_student' :
                 '''
                 SELECT * FROM app_student S, app_professor P, app_supervise Supervise
                 WHERE S.s_id = Supervise.s_id AND P.p_id = Supervise.p_id AND P.p_id = %s
                 ''',
         },
         'head' : {
-            'เกรดเฉลี่ยนิสิตตามชั้นปี':
-                '''
-                SELECT * FROM app_student S
-                WHERE LEFT(S.s_id,2) = %s
-                '''
+
         }
     }
-    # if (Person.type == 'officer'):
-    #     all_results = Student.objects.raw(query['officer][tab])
-    # elif (Person.type == 'teacher'):
-    #     all_results = Student.objects.raw(query['teacher'][tab], [id])
-    # else :
-    #     all_results = Student.objects.raw(query['head'][tab], ['57'])
 
-    all_results = Student.objects.raw(query['officer'][tab])
+    # --------------- Deal with filter condition ---------------
+
+    filter_exist = False
+    where = ""
+    values = ['id'] if (Person.type == 'teacher') else []
+
+    for filter in filters:
+        column = filter[0]
+        op = filter[1]
+        value = filter[2]
+        if (op):
+            where = where + " AND " + column + " " + op + " %s"
+            values.append(value)
+
+    if (where):
+        where = where[-4:]
+        where = "WHERE" + where
+        filter_exist = True
+
+    if (type == 'teacher'): filter_exist = True
+
+    # --------------- Start querying object ---------------
+
+    if (tab in ["tab_teacher", "tab_dean"] and type == 'officer'):
+        if (filter_exist):
+            all_results = Professor.objects.raw(query[type][tab], value)
+        else:
+            all_results = Professor.objects.raw(query[type][tab])
+    else:
+        if (filter_exist):
+            all_results = Student.objects.raw(query[type][tab], value)
+        else:
+            all_results = Student.objects.raw(query[type][tab])
+
     data = {
         'column' : []
     }
@@ -129,18 +166,99 @@ def query(request):
         for column in selected_columns:
             if column == 's_id':
                 data[column].append(result.s_id)
-            # elif column == 'c_name':
-            #     data[column].append(result.c_name)
-            # elif column == 'grade':
-            #     data[column].append(result.grade)
             elif column == 's_name':
                 data[column].append(result.s_name)
             elif column == 's_surname':
                 data[column].append(result.s_surname)
+            elif column == 's_department':
+                data[column].append(result.d_name)
+            elif column == 's_faculty':
+                data[column].append(result.f_name)
+            elif column == 's_address':
+                data[column].append(result.s_address)
+            elif column == 's_tel':
+                data[column].append(result.s_tel_no)
+            elif column == 's_year':
+                year = Current.year - result.since
+                data[column].append(year)
+            elif column == 'p_name':
+                data[column].append(result.p_name)
+            elif column == 'p_id':
+                data[column].append(result.p_id)
+            elif column == 'p_surname':
+                data[column].append(result.p_surname)
+            elif column == 'p_department':
+                data[column].append(result.p_department)
+            elif column == 'p_faculty':
+                data[column].append(result.p_faculty)
+            elif column == 'p_address':
+                data[column].append(result.p_address)
+            elif column == 'p_tel':
+                data[column].append(result.p_tel)
+            elif column == 'p_email':
+                data[column].append(result.p_email)
+
     print(data)
     return JsonResponse(data)
 
-# def render_info(request):
+def user_info(request):
+
+    query = {
+        'officer' : '''
+            SELECT * FROM app_officer
+            WHERE app_officer.o_id = %s;
+        ''',
+        'teacher_dean' : '''
+            SELECT * FROM app_professor P
+            JOIN app_manage_faculty ON app_manage_faculty.p_id = P.p_id
+            JOIN app_faculty ON app_manage_faculty.f_id = app_faculty.f_id
+            WHERE P.p_id = %s;
+        ''',
+        'teacher': '''
+            SELECT * FROM app_professor P
+            WHERE P.p_id = %s;
+        ''',
+        'teacher_head' : '''
+            SELECT * FROM app_professor P
+            JOIN app_manage_dept ON app_manage_dept.p_id = P.p_id
+            JOIN app_department ON app_manage_dept.d_id = app_department.d_id            
+            WHERE P.p_id = %s;
+        '''
+    }
+
+    data = {
+        'name' : "",
+        'position' : "",
+        'department' : "",
+        'faculty' : ""
+    }
+
+    for result in Professor.objects.raw(query['teacher'], ["id"]):
+        data['name'] = result.p_name + " " + result.p_surname
+        data['position'] = "Professor"
+        data['department'] = result.d_name
+        data['faculty'] = result.f_name
+
+    for result in Professor.objects.raw(query['teacher_dean'], ["id"]):
+        data['name'] = result.p_name + " " + result.p_surname
+        data['position'] = "Dean"
+        data['department'] = result.d_name
+        data['faculty'] = result.f_name
+
+    for result in Professor.objects.raw(query['teacher_head'], ["id"]):
+        data['name'] = result.p_name + " " + result.p_surname
+        data['position'] = "Head of department"
+        data['department'] = result.d_name
+        data['faculty'] = result.f_name
+
+    for result in Officer.objects.raw(query['officer'], ["id"]):
+        data['name'] = result.o_name + " " + result.o_surname
+        data['position'] = "Officer"
+        # data['department'] = result.d_name
+        # data['faculty'] = result.f_name
+
+    return JsonResponse(data)
+
 
 
 def student_info(request):
@@ -148,6 +266,8 @@ def student_info(request):
     query = {
         'info' : '''
             SELECT * FROM app_student S
+            JOIN app_department ON app_department.d_id = S.d_id
+            JOIN app_faculty ON app_faculty.f_id = app_department.f_id
             WHERE S.s_id = %s;
         ''',
         'acivity' : '''
@@ -176,57 +296,94 @@ def student_info(request):
             JOIN app_semester ON app_semester.id = app_take_exchange_program.term_year_id
             WHERE S.s_id = %s;
         ''',
-        'research' : '''
+        'senior_project' : '''
             SELECT * FROM app_student S
-            JOIN app_research_owner ON app_research_owner.s_id = S.s_id
-            JOIN app_research ON app_research_owner.research_id = app_research.research_id
+            JOIN app_senior_project ON app_senior_project.s_id = S.s_id
+            JOIN app_project ON app_project.project_id = app_senior_project.project_id
+            JOIN app_professor ON app_project.p_id = app_professor.p_id
+            WHERE S.s_id = %s;
+        ''',
+        'thesis': '''
+            SELECT * FROM app_student S
+            JOIN app_thesis ON app_app_thesis.s_id = S.s_id
+            JOIN app_project ON app_project.project_id = app_thesis.project_id
+            JOIN app_professor ON app_project.p_id = app_professor.p_id
             WHERE S.s_id = %s;
         ''',
         'status': '''
                 SELECT * FROM app_student S
                 JOIN app_status ON app_status.s_id = S.s_id
                 WHERE S.s_id = %s AND app_status.term_year_id = %s;
-            '''
+        ''',
+        'scholarship': '''
+            SELECT * FROM app_student S
+            JOIN app_get_scholarship ON app_get_scholarship.s_id = app_scholarship.s_id 
+            JOIN app_scholarship ON app_scholarship.sch_id = app_get_scholarship.sch_id
+            JOIN app_semester ON app_semester.id = app_get_scholarship.term_year_id
+            WHERE S.s_id = %s
+        '''
     }
 
     student_id = s_id
     # student_id = "5730000621"
-    current_term_year_id = 8
-
+    # $("#pd_year").append(data['name']);
     data = {
         'id' : student_id,
-        'name' : "",
-        'tel_no' : "",
-        'email' : "",
-        'address' : "",
-        'student_status' : "",
-        'drop_status' : "",
+        'year' : "3",
+        's_name' : "-",
+        'department' : "-",
+        'faculty' : "-",
+        'tel_no' : "-",
+        'email' : "-",
+        'address' : "-",
+        'gpax' : 0,
+        'student_status' : "-",
+        'drop_status' : "-",
         'activity' : [],
-        'intern' : "-",
+        'comp_name' : "-",
         'exchange' : "-",
-        'research' : [],
+        'project_name' : "-",
+        'project_field': "-",
+        'project_advisor': "-",
+        'project_type': "-",
+        'scholarship': "-",
         'enroll' : []
     }
 
     for result in Student.objects.raw(query['info'], [student_id]):
-        data['name'] = result.s_name + " " + result.s_surname
+        data['s_name'] = result.s_name + " " + result.s_surname
         data['tel_no'] = result.s_tel_no
         data['email'] = result.s_email
         data['address'] = result.s_address
+        data['department'] = result.d_name
+        data['faculty'] = result.f_name
+        data['gpax'] = result.gpax
 
     for result in Student.objects.raw(query['acivity'], [student_id]):
         data['activity'].append(result.a_name)
 
-    for result in Student.objects.raw(query['research'], [student_id]):
-        data['research'].append([result.topic_name, result.type])
+    for result in Student.objects.raw(query['scholarship'], [student_id]):
+        data['activity'] = result.sch_name
+
+    for result in Student.objects.raw(query['senior_project'], [student_id]):
+        data['project_name'] = result.topic_name
+        data['project_field'] = result.topic_field
+        data['project_type'] = "Senior Project"
+        data['project_advisor'] = result.p_name
+
+    for result in Student.objects.raw(query['thesis'], [student_id]):
+        data['project_name'] = result.topic_name
+        data['project_field'] = result.topic_field
+        data['project_type'] = "Thesis"
+        data['project_advisor'] = result.p_name
 
     for result in Student.objects.raw(query['intern'], [student_id]):
-        data['internship'] = result.comp_name
+        data['comp_name'] = result.comp_name
 
     for result in Student.objects.raw(query['exchange'], [student_id]):
-        data['exchange'] = [result.university_name, result.country_name, result.term_year]
+        data['exchange'] = result.university_name + " in " + result.country_name
 
-    for result in Student.objects.raw(query['status'], [student_id, current_term_year_id]):
+    for result in Student.objects.raw(query['status'], [student_id]):
         data['student_status'] = result.student_status
         data['drop_status'] = result.drop_status
 
