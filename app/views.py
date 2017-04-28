@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import *
+import json
+import ast
 
 from . import views
 from django.http import JsonResponse
@@ -19,6 +21,9 @@ def index(request):
     return render(request, "login.html")
 
 def validate(request):
+    # 210101 officer
+    # 31300421 head
+    # 38311121 teacher
     id = request.GET.get('id', None)
     password = request.GET.get('password', None)
     type = ""
@@ -51,14 +56,35 @@ def validate(request):
 
     return JsonResponse(data)
 
-
 def query(request):
-    filter = request.GET.get('filter', None)
-    tab = request.GET.get('tab', None)
+
+    lists = request.POST.items()
+    # filter = json.dumps(lists)
+    # print(lists)
+    for i in lists:
+        # print(i, type(i))
+        # print(i[0], type(i[0]))
+        dict = ast.literal_eval(i[0])
+        # print(dict, type(dict))
+
+    print(dict['tab'], dict['filter'])
+    filters = dict['filter']
+    selected_columns = []
+    for filter in filters:
+        selected_columns.append(filter[0])
+    tab = dict['tab']
+
+    print(selected_columns)
+
+    # print(filter)
+    # [["id", "none", "none"]]
+    # tab = request.GET.get('tab', None)
+    # print(filter)
+    # print(tab)
 
     query = {
         'officer' : {
-            'ข้อมูลส่วนตัวนิสิต' :
+            'tab_student' :
                 '''
                 SELECT * FROM app_student S;
                 ''',
@@ -85,9 +111,14 @@ def query(request):
                 '''
         }
     }
-    # 31300421
-    all_results = Student.objects.raw(query[type]['ข้อมูลส่วนตัวนิสิต'], [id])
-    selected_columns = ['s_id', 's_name', 's_surname']
+    # if (Person.type == 'officer'):
+    #     all_results = Student.objects.raw(query['officer][tab])
+    # elif (Person.type == 'teacher'):
+    #     all_results = Student.objects.raw(query['teacher'][tab], [id])
+    # else :
+    #     all_results = Student.objects.raw(query['head'][tab], ['57'])
+
+    all_results = Student.objects.raw(query['officer'][tab])
     data = {
         'column' : []
     }
@@ -98,18 +129,22 @@ def query(request):
         for column in selected_columns:
             if column == 's_id':
                 data[column].append(result.s_id)
-            elif column == 'c_name':
-                data[column].append(result.c_name)
-            elif column == 'grade':
-                data[column].append(result.grade)
+            # elif column == 'c_name':
+            #     data[column].append(result.c_name)
+            # elif column == 'grade':
+            #     data[column].append(result.grade)
             elif column == 's_name':
                 data[column].append(result.s_name)
             elif column == 's_surname':
                 data[column].append(result.s_surname)
+    print(data)
     return JsonResponse(data)
 
-def student_info(s_id):
+# def render_info(request):
 
+
+def student_info(request):
+    s_id = request.POST.get('id', None)
     query = {
         'info' : '''
             SELECT * FROM app_student S
@@ -198,7 +233,7 @@ def student_info(s_id):
     for result in Student.objects.raw(query['enroll'], [student_id]):
         data['enroll'].append([result.c_name, result.grade, result.section_no_id])
 
-    return data
+    return JsonResponse(data)
 
 def teacher(request) :
     return render(request, 'teacher.html')

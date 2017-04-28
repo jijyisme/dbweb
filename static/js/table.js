@@ -9,24 +9,20 @@ var temp = [];
 
 function drawTable(data){
   $('#table_data tr').remove();
-  data = [
-    {id: '1', name: 'a'},
-    {id: '2', name: 'b'},
-    {id: '3', name: 'c'}
-  ];
+ // console.log(data['id']);
 // create header
         temp = filter_detail;
         var header = '<thead><tr class="w3-blue">';
-        for(var i=0; i<temp.length; i++){
-            header += '<th>'+temp[i][0].toUpperCase()+'</th>';
+        for(var i=0; i<data[0].length; i++){
+            header += '<th>'+data[0][i].toUpperCase()+'</th>';
         }
         header += '</tr></thead>';
         $('#table_data').append(header);
 // create rows
         var rows;
-        for(var i=0; i<data.length; i++) {
+        for(var i=0; i<data[1].length; i++) {
             //rows += '<tr>';
-            rows = $("<tr>",{id:data[i]['id']});
+            rows = $("<tr>",{id:data[1][i]});
             rows.click(function(){
               console.log(this.id);
               if(sel_tab == 'tab_student'){getStudentData(this.id);}
@@ -38,9 +34,9 @@ function drawTable(data){
             rows.mouseout(function(){
               $(this).toggleClass("w3-grey w3-text-white");
             });
-            for(var j=0; j<temp.length; j++){
+            for(var j=1; j<=data[0].length; j++){
             //rows += '<td>' + data[i][temp[j][0]] + '</td>';
-            rows.append('<td>' + data[i][temp[j][0]] + '</td>');
+            rows.append('<td>' + data[j][i] + '</td>');
             }
             //rows += '</tr>';
             $('#table_data').append(rows);
@@ -76,31 +72,35 @@ for(var i=0; i<filter_detail.length; i++){
 }
 
 function drawPersonalData(data){
-  $("#pd_name").append('name');
-  $("#pd_year").append(data['name']);
-  $("#pd_department").append(data['name']);
-  $("#pd_faculty").append(data['name']);
-  $("#pd_tel_no").append(data['name']);
-  $("#pd_email").append(data['name']);
-  $("#pd_gpax").append(data['name']);
-  $("#pd_proj_name").append(data['name']);
-  $("#pd_proj_field").append(data['name']);
-  $("#pd_proj_advisor").append(data['name']);
-  $("#pd_proj_type").append(data['name']);
-  $("#pd_scholar").append(data['name']);
-  $("#pd_scholar_period").append(data['name']);
-  $("#pd_comp").append(data['name']);
-  $("#pd_intern_period").append(data['name']);
-  $("#table_data").show();
+  $("#student_name").append("jijy");
+  $("#pd_name").append(data.name);
+//  $("#pd_year").append(data['name']);
+//  $("#pd_department").append(data['name']);
+//  $("#pd_faculty").append(data['name']);
+//  $("#pd_tel_no").append(data['tel_no']);
+//  $("#pd_email").append(data['email']);
+//  $("#pd_gpax").append(data['name']);
+//  $("#pd_proj_name").append(data['name']);
+//  $("#pd_proj_field").append(data['name']);
+//  $("#pd_proj_advisor").append(data['name']);
+//  $("#pd_proj_type").append(data['name']);
+//  $("#pd_scholar").append(data['name']);
+//  $("#pd_scholar_period").append(data['name']);
+//  $("#pd_comp").append(data['internship']);
+//  $("#pd_intern_term/year").append(data['name']);
+//  $("#pd_student_status").append(data['name']);
+//  $("#pd_drop_status").append(data['name']);
+  $("#student_profile").show();
 
 }
 function getStudentData(s_id){
   console.log(s_id);
   $.ajax({
-    type: "GET",
-    url: "/home/query",
-    data: {func:'student_info',id: s_id},
+    type: "POST",
+    url: "/home/student_info",
+    data: {id: s_id},
     success: function(response) {
+     console.log(response)
      drawPersonalData(response);
      }
   });
@@ -123,15 +123,34 @@ $("#apply_btn").click(function(){
     filter_detail[i][2] = $("#textbox"+i).val();
   }
   $("#student_profile").hide();
-
 //send request to view.py
     $.ajax({
-      type: "GET",
-      url: "/home/teacher",
-      data: {tab : sel_tab, filter : filter_detail },
+      type: "POST",
+      url: "/home/query",
+      dataType : "json",
+      data: JSON.stringify({ 'tab' : sel_tab ,'filter' : filter_detail }),
       success: function(response) {
-       drawTable(response);
-       $("#table").show();
+          console.log(response);
+          var arr = [];
+            $.each(response,function(key,value){
+            arr.push(value);
+            });
+          console.log(arr);
+
+          drawTable(arr);
+          $("#table").show();
+//        column = response["column"]
+//        console.log(column)
+//        for(var i=0;i<response.id.length;i++){
+//            for(var j=0;j<column.length;i++){
+//                console.log()
+//            }
+//        }
+//        column = ['a', 'b', 'c']
+//        for x in column:
+//            if (x =='a')
+//             response['a']
+//             elif
        }
     });
 //just print sent data
