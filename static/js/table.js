@@ -123,7 +123,6 @@ function drawPersonalData(data){
           $('#student_profile_table').show();
   }
 
-}
 function drawUserData(data){
   $("#user_name").append("<h2>"+data['title']+data['name']+"</h2>");
   $("#user_info").append("<p>"+data['department']+"</p>");
