@@ -205,8 +205,9 @@ def user_info(request):
 
     query = {
         'officer' : '''
-            SELECT * FROM app_officer
-            WHERE app_officer.o_id = %s;
+            SELECT * FROM app_officer O
+            JOIN app_department ON app_department.d_id = O.d_id
+            WHERE O.o_id = %s;
         ''',
         'teacher_dean' : '''
             SELECT * FROM app_professor P
@@ -216,6 +217,8 @@ def user_info(request):
         ''',
         'teacher': '''
             SELECT * FROM app_professor P
+            JOIN app_department ON app_manage_dept.d_id = P.d_id
+            JOIN app_faculty ON app_department.f_id = app_faculty.f_id
             WHERE P.p_id = %s;
         ''',
         'teacher_head' : '''
@@ -254,7 +257,7 @@ def user_info(request):
     for result in Officer.objects.raw(query['officer'], ["id"]):
         data['name'] = result.o_name + " " + result.o_surname
         data['position'] = "Officer"
-        # data['department'] = result.d_name
+        data['department'] = result.d_name
         # data['faculty'] = result.f_name
 
     return JsonResponse(data)
