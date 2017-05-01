@@ -77,6 +77,7 @@ function drawPersonalData(data){
   $('#student_profile_table h2').remove();
   $('#student_profile_table h5').remove();
   //add student's info
+  $("#pd_name").append(data['name'));
   $("#pd_year").append(data['year']);
   $("#pd_department").append(data['department']);
   $("#pd_faculty").append(data['faculty']);
