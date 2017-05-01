@@ -21,7 +21,7 @@
         html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", "sans-serif}
     </style>
 </head>
-<body class="w3-light-grey">
+<body class="w3-light-grey" onload ="getUserData()">
     <!-- Page Container -->
 <div class="w3-content w3-margin-top" style="max-width:1400px;">
   <!-- The Grid -->
@@ -45,7 +45,6 @@
     <div class="w3-threequarter">
       <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Information Center</h2>
-
           <!--TAB-->
           <div id = "tab" class="w3-blue w3-container ">
             {% block tab %}{% endblock %}
@@ -63,9 +62,7 @@
                     <button id = "apply_btn" class="w3-button w3-round w3-text-white flip">Apply</button>
                   </div>
                 </div>
-
                 {% block add_column %}{% endblock %}
-
                 {% block filter%}{% endblock %}
         </div>
         <div id = "table" class ="w3-container w3-white" >
@@ -88,7 +85,6 @@
               <p id = 'pd_drop_status'>สถานะการลาพัก </p>
               <hr>
             </div>
-
             <div class="w3-container w3-third">
               <h5 class="w3-opacity"><b>ประวัติการฝึกงาน</b></h5>
               <h6 id = 'pd_intern_period' class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>ภาคการศึกษาที่ฝึก</h6>
@@ -97,7 +93,6 @@
               <h6 id = 'pd_scholar_period' class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>ระยะเวลา</h6>
               <pid = 'pd_scholar'>ชื่อทุนการศึกษา</p>              <br>
             </div>
-
             <div class="w3-container w3-third">
               <h5 class="w3-opacity"><b>Project</b></h5>
               <h6 id = 'pd_proj_type' class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>ประเภทซีเนียหรือธีสิส</h6>
@@ -109,7 +104,6 @@
             <div class="w3-container">
               <h5 class="w3-opacity"><b>ประวัติการลงทะเบียนเรียน<b></h5>
                 <table  id = "student_profile_table" style="margin-top:50px height:200px " class="w3-table-all w3-hoverable w3-card-2 w3-round">
-
                 </table>
               <hr>
             </div>
@@ -130,7 +124,5 @@
   <p>Powered by <a href="" target="_blank">General AMR</a></p>
 </footer>
 <script src="{% static 'js/table.js' %}"></script>
-
 {% block action %}{% endblock %}
-
 </html>

@@ -64,6 +64,7 @@ class Professor(models.Model):
 
 class Officer(models.Model):
     d = models.ForeignKey(Department, on_delete=models.CASCADE)
+    o_title = models.CharField(max_length=5)
     o_id = models.CharField(max_length=10, primary_key=True, default="0000000000")
     o_name = models.CharField(max_length=30)
     o_surname = models.CharField(max_length=50)
@@ -101,12 +102,6 @@ class Section(models.Model):
 class Semester(models.Model):
     term_year = models.CharField(max_length=6, default="0/0000")
 
-class Tuition_fee(models.Model):
-    d = models.ForeignKey(Department, on_delete=models.CASCADE)
-    fee = models.IntegerField(primary_key=True, default=0)
-    class Meta:
-        unique_together = (('fee', 'd'),)
-
 class Graduated(models.Model):
     s = models.ForeignKey(Student, on_delete=models.CASCADE)
 
@@ -114,6 +109,7 @@ class Undergraduated(models.Model):
     s = models.ForeignKey(Student, on_delete=models.CASCADE)
 
 class Program(models.Model):
+    d = models.ForeignKey(Department)
     program_id = models.CharField(max_length=5, primary_key=True, default="00000")
     program_name = models.CharField(max_length=30)
     fee = models.PositiveIntegerField

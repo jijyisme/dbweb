@@ -1,4 +1,3 @@
-
 var sel_tab = "tab_student";
 var tname = "student";
 var filter_detail = [];
@@ -9,23 +8,26 @@ var temp = [];
 
 function drawTable(data){
   $('#table_data tr').remove();
- // console.log(data['id']);
-// create header
         temp = filter_detail;
         var header = '<thead><tr class="w3-blue">';
-        for(var i=0; i<data[0].length; i++){
-            header += '<th>'+data[0][i].toUpperCase()+'</th>';
+        for(var i=0; i<temp.length; i++){
+            header += '<th>'+temp[i][0].toUpperCase()+'</th>';
         }
         header += '</tr></thead>';
         $('#table_data').append(header);
 // create rows
-        var rows;
-        for(var i=0; i<data[1].length; i++) {
-            //rows += '<tr>';
+        var rows,begin_index=1;
+        if(sel_tab=='tab_student'&&temp[0][0]!='id'){
+          begin_index = 2;
+        }
+        for(var i=begin_index; i<data[1].length; i++) {
+
             rows = $("<tr>",{id:data[1][i]});
             rows.click(function(){
-              console.log(this.id);
-              if(sel_tab == 'tab_student'){getStudentData(this.id);}
+
+              if(sel_tab == 'tab_student'){
+                getStudentData(this.id);
+              }
 
             });
             rows.mouseover(function(){
@@ -35,21 +37,18 @@ function drawTable(data){
               $(this).toggleClass("w3-grey w3-text-white");
             });
             for(var j=1; j<=data[0].length; j++){
-            //rows += '<td>' + data[i][temp[j][0]] + '</td>';
             rows.append('<td>' + data[j][i] + '</td>');
             }
-            //rows += '</tr>';
             $('#table_data').append(rows);
         }
-
-        //$('#table_data').append(header+rows);
 }
 function drawFilterTab(){
 $("#filtertab_detail").empty();
 if(filter_detail.length==0){
   $('#filtertab_detail').append("<p> Please select column before filter</p>");
   return;
-}
+  }
+
 //create Operation and Value
 var dropdown,textbox;
 for(var i=0; i<filter_detail.length; i++){
@@ -72,29 +71,65 @@ for(var i=0; i<filter_detail.length; i++){
 }
 
 function drawPersonalData(data){
-  $("#student_name").append("jijy");
-  $("#pd_name").append(data.name);
-//  $("#pd_year").append(data['name']);
-//  $("#pd_department").append(data['name']);
-//  $("#pd_faculty").append(data['name']);
-//  $("#pd_tel_no").append(data['tel_no']);
-//  $("#pd_email").append(data['email']);
-//  $("#pd_gpax").append(data['name']);
-//  $("#pd_proj_name").append(data['name']);
-//  $("#pd_proj_field").append(data['name']);
-//  $("#pd_proj_advisor").append(data['name']);
-//  $("#pd_proj_type").append(data['name']);
-//  $("#pd_scholar").append(data['name']);
+  //clear previous panel
+  $('#student_profile_table').hide();
+  $('#student_profile_table p').remove();
+  $('#student_profile_table h2').remove();
+  $('#student_profile_table h5').remove();
+  //add student's info
+  $("#pd_year").append(data['year']);
+  $("#pd_department").append(data['department']);
+  $("#pd_faculty").append(data['faculty']);
+  $("#pd_tel_no").append(data['tel_no']);
+  $("#pd_email").append(data['email']);
+  $("#pd_gpax").append(data['gpax']);
+  $("#pd_proj_name").append(data['project_name']);
+  $("#pd_proj_field").append(data['project_field']);
+  $("#pd_proj_advisor").append(data['project_advisor']);
+  $("#pd_proj_type").append(data['project_type']);
+  $("#pd_scholar").append(data['scholarship']);
 //  $("#pd_scholar_period").append(data['name']);
-//  $("#pd_comp").append(data['internship']);
-//  $("#pd_intern_term/year").append(data['name']);
-//  $("#pd_student_status").append(data['name']);
-//  $("#pd_drop_status").append(data['name']);
+  $("#pd_comp").append(data['comp_name']);
+//  $("#pd_intern_period").append(data['name']);
+  $("#pd_student_status").append(data['student_status']);
+  $("#pd_drop_status").append(data['drop_status']);
   $("#student_profile").show();
+  //add enrollment table
+  var enroll = data['enroll'];
+  // create header
+          temp = ['course id', 'course name', 'grade', 'credit','term/year'];
+          var header = '<thead><tr class="w3-blue">';
+          for(var i=0; i<temp.length; i++){
+              header += '<th>'+temp[i][0].toUpperCase()+'</th>';
+          }
+          header += '</tr></thead>';
+          $('#student_profile_table').append(header);
+  // create rows
+          var rows;
+          for(var i=0; i<data.length; i++) {
+              rows = $("<tr>",{id:enroll[i]['id']});
+              rows.mouseover(function(){
+                $(this).toggleClass("w3-grey w3-text-white");
+              });
+              rows.mouseout(function(){
+                $(this).toggleClass("w3-grey w3-text-white");
+              });
+              for(var j=0; j<temp.length; j++){
+              rows.append('<td>' + enroll[i][temp[j][0]] + '</td>');
+              }
+              $('#student_profile_table').append(rows);
+          }
+          $('#student_profile_table').show();
+  }
 
+function drawUserData(data){
+  $("#user_name").append("<h2>"+data['name']+"</h2>");
+  $("#user_info").append("<p>"+data['position']+"</p>");
+  $("#user_info").append("<p>"+data['department']+"</p>");
+  $("#user_info").append("<p>"+data['faculty']+"</p>");
+//  $("#user_info").append("<p>"+data['name']+"</p>");
 }
 function getStudentData(s_id){
-  console.log(s_id);
   $.ajax({
     type: "POST",
     url: "/home/student_info",
@@ -105,11 +140,21 @@ function getStudentData(s_id){
      }
   });
 }
+function getUserData(id){
+  $.ajax({
+    type: "POST",
+    url: "/home/user_info",
+    success: function(response) {
+     console.log(response)
+     drawUserData(response);
+     }
+  });
+}
 $(":checkbox").click(function(){
     console.log("check");
     filter_detail = [];
    $('input:checked').map(function() {
-      filter_detail.push([this.value,'none','none']);
+      filter_detail.push([this.value,'none','']);
    });
    console.log(filter_detail);
    drawFilterTab();

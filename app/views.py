@@ -18,6 +18,7 @@ class Person:
     type = ""
 class Current:
     year = datetime.datetime.now().year
+    term = "8"
 
 # Create your views here.
 def index(request):
@@ -56,13 +57,14 @@ def validate(request):
     # assign static value by logging in
     Person.id = id
     Person.type = type
-
+    print(data)
     return JsonResponse(data)
 
-def query(request):
-    type = 'officer'
 
-    # Receiving object from ajax
+# def query(request):
+#     type = 'officer'
+#
+#     # Receiving object from ajax
 
 def query(request):
 
@@ -93,12 +95,14 @@ def query(request):
                 ''',
             'tab_teacher':
                 '''
-                SELECT * FROM app_professor P;
+                SELECT * FROM app_professor P
+                JOIN app_department ON app_department.d_id = P.d_id
+                JOIN app_faculty ON app_faculty.f_id = app_department.f_id
                 ''',
             'tab_scholarship':
                 '''
                 SELECT * FROM app_student S
-                JOIN app_get_scholarship ON app_get_scholarship.s_id = app_scholarship.s_id 
+                JOIN app_get_scholarship ON app_get_scholarship.s_id = S.s_id 
                 JOIN app_scholarship ON app_scholarship.sch_id = app_get_scholarship.sch_id
                 JOIN app_semester ON app_semester.id = app_get_scholarship.term_year_id;
                 ''',
@@ -126,35 +130,45 @@ def query(request):
 
     filter_exist = False
     where = ""
-    values = ['id'] if (Person.type == 'teacher') else []
+    values = [Person.id] if (Person.type == 'teacher') else []
 
     for filter in filters:
         column = filter[0]
         op = filter[1]
         value = filter[2]
-        if (op):
+        if (op and value):
+            if (column == 's_year'): column = "since"
             where = where + " AND " + column + " " + op + " %s"
+            print("------" + where)
             values.append(value)
 
     if (where):
-        where = where[-4:]
-        where = "WHERE" + where
         filter_exist = True
-
-    if (type == 'teacher'): filter_exist = True
+        if (not Person.type == 'teacher'):
+            where = where[4:]
+            where = "WHERE S." + where
 
     # --------------- Start querying object ---------------
 
-    if (tab in ["tab_teacher", "tab_dean"] and type == 'officer'):
+    print("filter_exist = ", filter_exist)
+    print(query[Person.type][tab])
+    print(where)
+    print(values)
+
+    if (tab in ["tab_teacher", "tab_dean"] and Person.type == 'officer'):
         if (filter_exist):
-            all_results = Professor.objects.raw(query[type][tab], value)
+            all_results = Professor.objects.raw(query[Person.type][tab] + where, values)
         else:
-            all_results = Professor.objects.raw(query[type][tab])
+            print("t")
+            all_results = Professor.objects.raw(query[Person.type][tab])
     else:
         if (filter_exist):
-            all_results = Student.objects.raw(query[type][tab], value)
+            print(query[Person.type][tab] + where)
+            print(values)
+            all_results = Student.objects.raw(query[Person.type][tab] + where, values)
         else:
-            all_results = Student.objects.raw(query[type][tab])
+            print("o")
+            all_results = Student.objects.raw(query[Person.type][tab])
 
     data = {
         'column' : []
@@ -180,7 +194,7 @@ def query(request):
                 data[column].append(result.s_tel_no)
             elif column == 's_year':
                 year = Current.year - result.since
-                data[column].append(year)
+                data[column].append(result.since)
             elif column == 'p_name':
                 data[column].append(result.p_name)
             elif column == 'p_id':
@@ -188,9 +202,9 @@ def query(request):
             elif column == 'p_surname':
                 data[column].append(result.p_surname)
             elif column == 'p_department':
-                data[column].append(result.p_department)
+                data[column].append(result.d_name)
             elif column == 'p_faculty':
-                data[column].append(result.p_faculty)
+                data[column].append(result.f_name)
             elif column == 'p_address':
                 data[column].append(result.p_address)
             elif column == 'p_tel':
@@ -228,7 +242,7 @@ def user_info(request):
             WHERE P.p_id = %s;
         '''
     }
-
+    # type = 'officer'
     data = {
         'name' : "",
         'position' : "",
@@ -236,36 +250,41 @@ def user_info(request):
         'faculty' : ""
     }
 
-    for result in Professor.objects.raw(query['teacher'], ["id"]):
-        data['name'] = result.p_name + " " + result.p_surname
-        data['position'] = "Professor"
-        data['department'] = result.d_name
-        data['faculty'] = result.f_name
+    if (Person.type == 'teacher'):
+        for result in Professor.objects.raw(query['teacher'], [Person.id]):
+            data['name'] = result.p_title + " " + result.p_name + " " + result.p_surname
+            data['position'] = "Professor"
+            data['department'] = result.d_name
+            data['faculty'] = result.f_name
 
-    for result in Professor.objects.raw(query['teacher_dean'], ["id"]):
-        data['name'] = result.p_name + " " + result.p_surname
-        data['position'] = "Dean"
-        data['department'] = result.d_name
-        data['faculty'] = result.f_name
+        for result in Professor.objects.raw(query['teacher_dean'], [Person.id]):
+            if (result):
+                data['name'] = result.p_title + " " + result.p_name + " " + result.p_surname
+                data['position'] = "Dean"
+                data['department'] = result.d_name
+                data['faculty'] = result.f_name
+    elif (Person.type == 'head'):
+        for result in Professor.objects.raw(query['teacher_head'], [Person.id]):
+            data['name'] = result.p_title + " " + result.p_name + " " + result.p_surname
+            data['position'] = "Head of department"
+            data['department'] = result.d_name
+            data['faculty'] = result.f_name
 
-    for result in Professor.objects.raw(query['teacher_head'], ["id"]):
-        data['name'] = result.p_name + " " + result.p_surname
-        data['position'] = "Head of department"
-        data['department'] = result.d_name
-        data['faculty'] = result.f_name
-
-    for result in Officer.objects.raw(query['officer'], ["id"]):
-        data['name'] = result.o_name + " " + result.o_surname
-        data['position'] = "Officer"
-        data['department'] = result.d_name
-        # data['faculty'] = result.f_name
-
+    else:
+        for result in Officer.objects.raw(query[Person.type], [Person.id]):
+            data['name'] = result.o_title + " " + result.o_name + " " + result.o_surname
+            data['position'] = "Officer"
+            data['department'] = "-"
+            # data['faculty'] = result.f_name
+    print(data)
     return JsonResponse(data)
 
 
 
 def student_info(request):
     s_id = request.POST.get('id', None)
+    print("##################")
+    print(s_id)
     query = {
         'info' : '''
             SELECT * FROM app_student S
@@ -308,7 +327,7 @@ def student_info(request):
         ''',
         'thesis': '''
             SELECT * FROM app_student S
-            JOIN app_thesis ON app_app_thesis.s_id = S.s_id
+            JOIN app_thesis ON app_thesis.s_id = S.s_id
             JOIN app_project ON app_project.project_id = app_thesis.project_id
             JOIN app_professor ON app_project.p_id = app_professor.p_id
             WHERE S.s_id = %s;
@@ -320,7 +339,7 @@ def student_info(request):
         ''',
         'scholarship': '''
             SELECT * FROM app_student S
-            JOIN app_get_scholarship ON app_get_scholarship.s_id = app_scholarship.s_id 
+            JOIN app_get_scholarship ON app_get_scholarship.s_id = S.s_id 
             JOIN app_scholarship ON app_scholarship.sch_id = app_get_scholarship.sch_id
             JOIN app_semester ON app_semester.id = app_get_scholarship.term_year_id
             WHERE S.s_id = %s
@@ -332,7 +351,7 @@ def student_info(request):
     # $("#pd_year").append(data['name']);
     data = {
         'id' : student_id,
-        'year' : "3",
+        'year': 0,
         's_name' : "-",
         'department' : "-",
         'faculty' : "-",
@@ -350,7 +369,8 @@ def student_info(request):
         'project_advisor': "-",
         'project_type': "-",
         'scholarship': "-",
-        'enroll' : []
+        'enroll': [],
+        'comp_name': "-"
     }
 
     for result in Student.objects.raw(query['info'], [student_id]):
@@ -360,7 +380,8 @@ def student_info(request):
         data['address'] = result.s_address
         data['department'] = result.d_name
         data['faculty'] = result.f_name
-        data['gpax'] = result.gpax
+        data['gpax'] = result.s_gpax
+        data['year'] = Current.year - result.since
 
     for result in Student.objects.raw(query['acivity'], [student_id]):
         data['activity'].append(result.a_name)
@@ -370,13 +391,13 @@ def student_info(request):
 
     for result in Student.objects.raw(query['senior_project'], [student_id]):
         data['project_name'] = result.topic_name
-        data['project_field'] = result.topic_field
+        data['project_field'] = result.related_field
         data['project_type'] = "Senior Project"
         data['project_advisor'] = result.p_name
 
     for result in Student.objects.raw(query['thesis'], [student_id]):
         data['project_name'] = result.topic_name
-        data['project_field'] = result.topic_field
+        data['project_field'] = result.related_field
         data['project_type'] = "Thesis"
         data['project_advisor'] = result.p_name
 
@@ -386,7 +407,7 @@ def student_info(request):
     for result in Student.objects.raw(query['exchange'], [student_id]):
         data['exchange'] = result.university_name + " in " + result.country_name
 
-    for result in Student.objects.raw(query['status'], [student_id]):
+    for result in Student.objects.raw(query['status'], [student_id, Current.term]):
         data['student_status'] = result.student_status
         data['drop_status'] = result.drop_status
 
